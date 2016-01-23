@@ -20,6 +20,7 @@ class ReportController extends Controller {
             $longitude = @$allPostVars['longitude']?@trim(htmlspecialchars($allPostVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
             $latitude = @$allPostVars['latitude']?@trim(htmlspecialchars($allPostVars['latitude'], ENT_QUOTES, 'UTF-8')):NULL;
             
+            echo "A";
             if ( !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)) {
             	$app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
