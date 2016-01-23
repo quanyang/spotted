@@ -13,13 +13,16 @@ var mainView = myApp.addView('.view-main', {
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function (page) {
     // run createContentPage func after link was clicked
-    console.log("TEST");
+    console.log("")
     $$('.create-page').on('click', function () {
         createContentPage();
     });
 });
 
-
+myApp.onPageInit('upload', function (page) {
+  console.log('Services page initialized');
+  console.log(page);
+});
 
 // Generate dynamic page
 var dynamicPageIndex = 0;
