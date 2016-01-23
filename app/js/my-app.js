@@ -49,13 +49,15 @@ function createContentPage() {
 function getLocation() {
     console.log("in here");
     if (navigator.geolocation) {
-        return navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition);
     } else { 
         return "Geolocation is not supported by this browser.";
     }
 }
 
 function showPosition(position) {
+    console.log("Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude);
     return "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude;  
 }
