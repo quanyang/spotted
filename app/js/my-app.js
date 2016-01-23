@@ -4,7 +4,6 @@ var myApp = new Framework7();
 // Export selectors engine
 var $$ = Dom7;
 
-
 // Add view
 var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
@@ -23,6 +22,13 @@ myApp.onPageInit('about', function (page) {
 myApp.onPageInit('upload', function (page) {
     initMap();
     getLocation();
+    $$('.confirm-ok').on('click', function () {
+        myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
+            myApp.alert('Your report has been sent!',"", function () {
+                mainView.router.load({ url: 'index.html' });
+            });
+        });
+    });
 });
 
 // Generate dynamic page
@@ -140,3 +146,4 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: The Geolocation service failed.' :
                         'Error: Your browser doesn\'t support geolocation.');
 }
+
