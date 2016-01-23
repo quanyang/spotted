@@ -20,8 +20,7 @@ myApp.onPageInit('about', function (page) {
 });
 
 myApp.onPageInit('upload', function (page) {
-  console.log('Services page initialized');
-  console.log(page);
+    document.getElementById("currLoc").innerHTML = getLocation();
 });
 
 // Generate dynamic page
