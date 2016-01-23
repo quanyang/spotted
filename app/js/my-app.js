@@ -13,10 +13,15 @@ var mainView = myApp.addView('.view-main', {
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function (page) {
     // run createContentPage func after link was clicked
+    console.log("")
     $$('.create-page').on('click', function () {
         createContentPage();
         document.getElementById("currLoc").innerHTML = myFunction(3,5);
     });
+});
+
+myApp.onPageInit('upload', function (page) {
+    document.getElementById("currLoc").innerHTML = getLocation();
 });
 
 // Generate dynamic page
@@ -46,6 +51,21 @@ function createContentPage() {
         '</div>'
     );
 	return;
+}
+function getLocation() {
+    console.log("in here");
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        return "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    console.log("Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude);
+    return "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;  
 }
 
 function showhide() {
