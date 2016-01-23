@@ -28,7 +28,7 @@
                 <div class="item-inner">
                           <div class="item-input">
                             <select id="myLocation" onchange="showhideLocation()">
-                                <option value="currentLoc" selected>Use current location</option>
+                                <option value="currentLoc" id="currLoc" selected></option>
                                 <option value="editLoc">Update location</option>
                             </select>
                               <input type="text" name="name" placeholder="Update Location" id="newLoc" style="display:none;">
@@ -37,7 +37,7 @@
             </div>
             </li>
         </ul>
-        <p class="list-block-label" id="currLoc"></p>
+<!--        <p class="list-block-label" id="currLoc"></p>-->
       </div>
         
       <div class="content-block-title">Animal Category</div>     
@@ -118,3 +118,4 @@
   </div>
 </div>
 
+ <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>

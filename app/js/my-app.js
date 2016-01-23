@@ -4,6 +4,7 @@ var myApp = new Framework7();
 // Export selectors engine
 var $$ = Dom7;
 
+
 // Add view
 var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
@@ -16,12 +17,11 @@ myApp.onPageInit('about', function (page) {
     console.log("")
     $$('.create-page').on('click', function () {
         createContentPage();
-        document.getElementById("currLoc").innerHTML = myFunction(3,5);
     });
 });
 
 myApp.onPageInit('upload', function (page) {
-    document.getElementById("currLoc").innerHTML = getLocation();
+    getLocation();
 });
 
 // Generate dynamic page
@@ -57,15 +57,22 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else { 
-        return "Geolocation is not supported by this browser.";
+        x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
 function showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude);
-    return "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;  
+    var x = document.getElementById("currLoc");
+    
+            var latlng = new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
+            var geocoder = geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        x.innerHTML = results[1].formatted_address + " (Current location) "  ;
+                    }
+                }
+            });
 }
 
 function showhide() {
@@ -98,20 +105,6 @@ function showhideLocation() {
     }
 }
 
-    function getLocation() {
-    console.log("in here");
-    if (navigator.geolocation) {
-        return navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-        return "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    return "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;	
-}
-
 function myFunction(a, b) {
     return a * b;
-    }
+}
