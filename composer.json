@@ -1,5 +1,4 @@
 {
-    "name": "quanyang/strayspotter",
     "autoload": {
         "psr-0": {
             "spotted" : "app/api/"
