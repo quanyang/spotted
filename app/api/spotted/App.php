@@ -9,7 +9,7 @@ use SlimJson\Middleware;
  * Class App
  *
  * Main class of the REST API
- * @package relive
+ * @package spotted
  */
 class App {
     /**

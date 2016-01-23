@@ -4,7 +4,7 @@
             "spotted" : "app/api/"
         },
         "files": [ "app/api/dbconfig.php" ],
-        "classmap": [ "app/api/spotted/controllers"]
+        "classmap": ["app/api/spotted/models/", "app/api/spotted/controllers/"]
     },
     "require": {
         "slim/slim": "*",
