@@ -72,7 +72,7 @@ class ImageController extends Controller {
             return;
         }
 
-        $fileName = Image::getFileNameFromUniqueId($uniqueId);
+        $fileName = $this->getFileNameFromUniqueId($uniqueId);
 
         if (empty($fileName)) {
             //default

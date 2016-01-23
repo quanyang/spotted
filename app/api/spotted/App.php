@@ -59,6 +59,10 @@ class App {
                 $app->render(200, ['Status' => 'Running']);
             });
 
+             $app->get('/13', function() use ($app) {
+                $app->render(200, ['Status' => 'Running']);
+            });
+
 
              // Route /api/item/photo
             $app->group('/photo', function() use ($app) {
