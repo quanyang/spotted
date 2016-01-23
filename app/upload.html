@@ -93,11 +93,7 @@ function showPosition(position) {
     return "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude;  
 }
-    
-    function myFunction(a, b) {
-    return a * b;
-}
-    document.getElementById("currLoc").innerHTML = myFunction(3,5);
+        document.getElementById("currLoc").innerHTML = getLocation();
 </script>
       <div class="content-block-title">Personal Contacts</div>    
       <form id="my-form" class="list-block">
