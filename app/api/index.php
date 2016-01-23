@@ -1,6 +1,6 @@
 <?php
 require_once '../../vendor/autoload.php';
-require_once 'relive/App.php';
+require_once 'spotted/App.php';
 
-$app = new relive\App();
+$app = new spotted\App();
 $app->run();
