@@ -1,12 +1,5 @@
 {
     "name": "quanyang/strayspotter",
-    "authors": [
-        {
-            "name": "Quan Yang",
-            "email": "quanyang@live.com"
-        }
-    ],
-
     "autoload": {
         "psr-0": {
             "spotted" : "app/api/"
