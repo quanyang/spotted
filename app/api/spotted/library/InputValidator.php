@@ -4,6 +4,11 @@ namespace spotted\library;
 
 class InputValidator {
 
+	public static function isValidIntValBetween($input, $start,$end) {
+		// inclusive 
+		return (!empty($input) && !is_null($input) && intval($input) >= $start && intval($input) <= $end); 
+	}
+
 	public static function isValidStringInput($input,$max_length=255,$min_length=0) {
 		return !(is_null($input)||empty($input)||strlen($input) > $max_length||strlen($input) < $min_length);
 	}

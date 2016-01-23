@@ -17,14 +17,38 @@ class ReportController extends Controller {
             $allPostVars = $app->request->post();
             $characteristics =  @$allPostVars['characteristics']?@trim(htmlspecialchars($allPostVars['characteristics'], ENT_QUOTES, 'UTF-8')):NULL;
             $number = @$allPostVars['number']?@trim(htmlspecialchars($allPostVars['number'], ENT_QUOTES, 'UTF-8')):NULL;
-            
+            $frequency = @$allPostVars['frequency']?@trim(htmlspecialchars($allPostVars['number'], ENT_QUOTES, 'UTF-8')):0; // 0,1,2
+            $category = @$allPostVars['category']?@trim(htmlspecialchars($allPostVars['category'], ENT_QUOTES, 'UTF-8')):0; //0,1,2,3 dog cat bird others
+            $others = @$allPostVars['others']?@trim(htmlspecialchars($allPostVars['others'], ENT_QUOTES, 'UTF-8')):NULL;
+            $fullName = @$allPostVars['fullName']?@trim(htmlspecialchars($allPostVars['fullName'], ENT_QUOTES, 'UTF-8')):NULL;
+            $email = @$allPostVars['email']?@trim(htmlspecialchars($allPostVars['email'], ENT_QUOTES, 'UTF-8')):NULL;
+            $longitude = @$allPostVars['longitude']?@trim(htmlspecialchars($allPostVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
+            $latitude = @$allPostVars['latitude']?@trim(htmlspecialchars($allPostVars['latitude'], ENT_QUOTES, 'UTF-8')):NULL;
+            $image_id = @$allPostVars['image']?@trim(htmlspecialchars($allPostVars['image'], ENT_QUOTES, 'UTF-8')):NULL;
+            $status = 0; // default
+            $isLostReport = 0; //Stray Report
 
-            if (!InputValidator::isValidStringInput($description,5000,0)|| !InputValidator::isValidStringInput($number,10,8) || !preg_match("/^[0-9]{8,10}$/",$number) ) {
+            if (!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
 
-            $job  = \parser\models\Job::where('id','=',$job_id)->first();
+            if (!is_null($email) && empty($email) && !InputValidator::isValidStringInput($email,255,0) && !InputValidator::isValidEmail($email)) {
+            	$app->render(400, ['Status' => 'Invalid input.' ]);
+            	return;
+            }
+
+			if (!is_null($fullName) && empty($fullName) && !InputValidator::isValidStringInput($fullName,255,0) ) {
+				$app->render(400, ['Status' => 'Invalid input.' ]);
+				return;
+			}    
+
+			if (!is_null($number) && empty($number) && !InputValidator::isValidStringInput($number,10,8) || !preg_match("/^[0-9]{8,10}$/",$number) ) {
+				$app->render(400, ['Status' => 'Invalid input.' ]);
+				return;
+			}            
+
+            $report  = new \spotter\models\Report();
             $user = \parser\models\User::where('email','=',$_SESSION['email'])->first();
 
             $job_application = \parser\models\Application::where('job_id','=',$job->id)->where('user_id','=',$user->id)->first();
