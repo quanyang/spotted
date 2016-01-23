@@ -10,7 +10,7 @@ use \spotted\Models\Image;
  * Controller class for all retrieval and creation of food items`
  * @package spotted
  **/
-class ImageController extends \spotted\controllers\Controller {
+class ImageController extends Controller {
 
     const COMPRESSION_RATE = 100;
 
@@ -34,7 +34,7 @@ class ImageController extends \spotted\controllers\Controller {
             } else {
                     //  Save to directory and db
 
-                $result = $this->saveToFile($currUserId, $photoFile['tmp_name'], $fileInfo['MIME-TYPE'], $fileInfo['DIRECTORY'], $fileInfo['ROUTE']);
+                $result = $this->saveToFile($photoFile['tmp_name'], $fileInfo['MIME-TYPE'], $fileInfo['DIRECTORY'], $fileInfo['ROUTE']);
                 if(is_null($result)) {
                     $app->render(500, array("Status" => "Unable to save file"));
                 } else {
@@ -64,7 +64,7 @@ class ImageController extends \spotted\controllers\Controller {
         return $info;
     }
 
-    public function downloadPhoto($uniqueId) {
+    public function downloadImage($uniqueId) {
         $app = \Slim\Slim::getInstance();
 
         if (empty($uniqueId) || is_null($uniqueId) || strlen($uniqueId) > 255 ) {
@@ -141,26 +141,19 @@ class ImageController extends \spotted\controllers\Controller {
         }
     }
 
-    private static function saveToDatabase($fileName, $route, $userId) {
+    private function saveToDatabase($fileName, $route, $reportId) {
         try {
-            $db = \Db::getInstance();
 
-            $req = $db->prepare('INSERT INTO Photo (`fileName`, `uniqueId`, `userId`) VALUES (:fileName, :uniqueId, :userId);');
-            $success = false;
-            $uniqueId = "";
-            while (!$success) {
-                $uniqueId = md5(uniqid("", true));
-                $success = $req->execute(array(
-                    'fileName' => $fileName,
-                    'userId' => $userId,
-                    'uniqueId' => $uniqueId
-                    ));
-            }
+            $uniqueId = md5(uniqid("", true));
+            $image = new \spotted\models\Image();
+            $image->uniqueId = $uniqueId;
+            $image->fileName = $filename;
+            $image->report_id = $reportId;
+            $image->save();
 
-            $id = $db->lastInsertId();
-
-            if ($id > 0 && $success) {
-                return new PhotoModel($id, $route . $uniqueId, $userId);
+            if ($image) {
+                $id = $image->id;
+                return $id;
             }
             return null;
         } catch (\PDOException $e) {
@@ -168,7 +161,7 @@ class ImageController extends \spotted\controllers\Controller {
         }
     }
 
-    public static function saveToFile($owner, $data, $mime, $dir, $route) {
+    public function saveToFile($data, $mime, $dir, $route) {
         $id = md5(uniqid("", true));
         list($mime, $ext) = split("/", $mime);
         $name = "img-" . $id . '.' . $ext;
@@ -179,57 +172,13 @@ class ImageController extends \spotted\controllers\Controller {
             $name = "img-" . $id . '.' . $ext;
         }
 
-        $compressPath =   PhotoModel::compress($data,$dir . $name);
-        PhotoModel::createThumbnail(512,400,$compressPath,$compressPath);
+        $compressPath =   $this->compress($data,$dir . $name);
 
         if (file_exists($compressPath)) {
-            return PhotoModel::saveToDatabase($name, $route, $owner);
+            return $this->saveToDatabase($name, $route, $owner);
         } else {
             return null;
         }
-    }
-
-    private static function createThumbnail($new_width,$new_height,$uploadDir,$moveToDir)
-    {
-        $path = $uploadDir;
-
-        $mime = getimagesize($path);
-
-        if($mime['mime']=='image/png'){ $src_img = imagecreatefrompng($path); }
-        if($mime['mime']=='image/jpg'){ $src_img = imagecreatefromjpeg($path); }
-        if($mime['mime']=='image/jpeg'){ $src_img = imagecreatefromjpeg($path); }
-        if($mime['mime']=='image/pjpeg'){ $src_img = imagecreatefromjpeg($path); }
-
-        $old_x          =   imageSX($src_img);
-        $old_y          =   imageSY($src_img);
-
-        $thumb_w    =   $new_width;
-        $thumb_h    =   $old_y*($new_width/$old_x);
-
-
-        $dst_img        =   ImageCreateTrueColor($thumb_w,$thumb_h);
-
-        imagecopyresampled($dst_img,$src_img,0,0,0,0,$thumb_w,$thumb_h,$old_x,$old_y); 
-
-
-    // New save location
-        $new_thumb_loc = $moveToDir;
-
-        if($mime['mime']=='image/png'){ $result = imagepng($dst_img,$new_thumb_loc,100); }
-        if($mime['mime']=='image/jpg'){ $result = imagejpeg($dst_img,$new_thumb_loc,100); }
-        if($mime['mime']=='image/jpeg'){ $result = imagejpeg($dst_img,$new_thumb_loc,100); }
-        if($mime['mime']=='image/pjpeg'){ $result = imagejpeg($dst_img,$new_thumb_loc,100); }
-
-        if ($thumb_h > $new_height) {
-            $to_crop_array = array('x' =>0 , 'y' => (($thumb_h-$new_height)/2.0), 'width' => $new_width, 'height'=> $new_height);
-            $dst_img = imagecrop($dst_img, $to_crop_array);
-            $result = imagejpeg($dst_img,$new_thumb_loc,100);
-        }
-
-        imagedestroy($dst_img); 
-        imagedestroy($src_img);
-
-        return $result;
     }
 
     private static function compress($source,$dest) {
@@ -242,7 +191,7 @@ class ImageController extends \spotted\controllers\Controller {
             $image = imagecreatefrompng($source); 
         } 
 
-        imagejpeg($image, $dest, PhotoModel::COMPRESSION_RATE); 
+        imagejpeg($image, $dest, COMPRESSION_RATE); 
         imagedestroy($image);
         return $dest;
     }
