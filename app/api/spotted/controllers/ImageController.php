@@ -72,10 +72,10 @@ class ImageController extends Controller {
             return;
         }
 
-        $fileName = Image::getFileNameFromUniqueId($uniqueId);
+        $fileName = $this->getFileNameFromUniqueId($uniqueId);
 
         if (empty($fileName)) {
-            //default
+            $app->render(500, ['Status' => 'An error occured.']);
             return;
         }
         $dir = 'uploads/';
