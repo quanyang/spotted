@@ -2,14 +2,14 @@
 
 namespace spotted;
 
+use spotted\models;
 use Slim\Slim;
 use SlimJson\Middleware;
-
 /**
  * Class App
  *
  * Main class of the REST API
- * @package spotted
+ * @package relive
  */
 class App {
     /**

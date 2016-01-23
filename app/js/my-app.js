@@ -46,3 +46,17 @@ function createContentPage() {
     );
 	return;
 }
+
+function showhide() {
+    var x = document.getElementById("mySelect").value;
+    var div1 = document.getElementById("newpost");
+    var div2 = document.getElementById("mySelect");
+
+    if ((div1.style.display !== "none") && (x == 'Other')) {
+        div1.style.display = "none";
+    }
+    else if ((div1.style.display == "none") && (x == 'Other')){
+        div1.style.display = "block";
+        div2.style.display = "none";
+    }
+}
