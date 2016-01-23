@@ -1,6 +1,6 @@
 <?php
 
-namespace relive\controllers;
+namespace spotted\controllers;
 
 class Controller {
 
