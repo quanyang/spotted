@@ -59,22 +59,20 @@ class App {
                 $app->render(200, ['Status' => 'Running']);
             });
 
-             $app->get('/13', function() use ($app) {
-                $app->render(200, ['Status' => 'Running']);
+            $app->group('/report', function() use ($app) {
+                $app->get('/lost', 'spotted\controllers\ReportController::getNearByLostReport');
+                $app->post('/lost', 'spotted\controllers\ReportController::newLostReport');
+                $app->post('/stray', 'spotted\controllers\ReportController::newStrayReport');
             });
-
 
              // Route /api/item/photo
             $app->group('/photo', function() use ($app) {
-
                 $imageController = new \spotted\controllers\ImageController();
-
                 // Get /api/item/photo/{photo}
                 // Note: Route maps to uploads/{photo}
                 $app->get('/:link', function($link) use ($app, $imageController) {
                     $imageController->downloadImage($link);
                 });
-
                 // POST /api/item/photo
                 $app->post('', function() use ($app, $imageController) {
                     $rawFiles = $_FILES;
