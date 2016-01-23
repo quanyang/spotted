@@ -60,3 +60,20 @@ function showhide() {
         div2.style.display = "none";
     }
 }
+
+function showhideLocation() {
+    var x = document.getElementById("myLocation").value;
+    var div1 = document.getElementById("newLoc");
+    var div2 = document.getElementById("myLocation");
+    var div3 = document.getElementById("currLoc");
+
+    if ((div1.style.display !== "none") && (x == 'editLoc')) {
+        div1.style.display = "none";
+    }
+    else if ((div1.style.display == "none") && (x == 'editLoc')){
+        div1.style.display = "block";
+        div2.style.display = "none";
+        div3.style.display = "none";
+    }
+}
+

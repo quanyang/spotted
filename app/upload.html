@@ -20,11 +20,26 @@
                 <p>Photo Taken</p>
             </div>
       </div>
-      <div class="content-block">
-            <div class="content-block-inner">
-                <p>Categories</p>
+     <div class="content-block-title">Last Seen Location</div>       
+      <div class="list-block">
+          <ul>
+            <li>    
+            <div class="item-content">
+                <div class="item-inner">
+                          <div class="item-input">
+                            <select id="myLocation" onchange="showhideLocation()">
+                                <option value="currentLoc" selected>Use current location</option>
+                                <option value="editLoc">Update location</option>
+                            </select>
+                              <input type="text" name="name" placeholder="Update Location" id="newLoc" style="display:none;">
+                          </div>
+                </div>
             </div>
+            </li>
+        </ul>
+        <p class="list-block-label" id="currLoc"></p>
       </div>
+        
       <div class="content-block-title">Animal Category</div>     
         <div class="list-block">
             <ul>
@@ -103,3 +118,24 @@
     </div>
   </div>
 </div>
+
+<script>
+    function getLocation() {
+    console.log("in here");
+    if (navigator.geolocation) {
+        return navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        return "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    return "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;	
+}
+    
+    function myFunction(a, b) {
+    return a * b;
+}
+    document.getElementById("currLoc").innerHTML = myFunction(3,5);
+</script>
