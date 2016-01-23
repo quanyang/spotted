@@ -64,7 +64,7 @@ class ImageController extends Controller {
         return $info;
     }
 
-    public function downloadPhoto($uniqueId) {
+    public function downloadImage($uniqueId) {
         $app = \Slim\Slim::getInstance();
 
         if (empty($uniqueId) || is_null($uniqueId) || strlen($uniqueId) > 255 ) {

@@ -59,6 +59,25 @@ class App {
                 $app->render(200, ['Status' => 'Running']);
             });
 
+
+             // Route /api/item/photo
+            $app->group('/photo', function() use ($app) {
+
+                $imageController = new \spotted\Controllers\ImageController();
+
+                // Get /api/item/photo/{photo}
+                // Note: Route maps to uploads/{photo}
+                $app->get('/:link', function($link) use ($app, $imageController) {
+                    $imageController->downloadImage($link);
+                });
+
+                // POST /api/item/photo
+                $app->post('', function() use ($app, $imageController) {
+                    $rawFiles = $_FILES;
+                    $imageController->uploadImage($app->request->getUrl(), $rawFiles);
+                })->name('photo');
+            });
+
             /*
 
             $app->group('/hashtag', function() use ($app) {
