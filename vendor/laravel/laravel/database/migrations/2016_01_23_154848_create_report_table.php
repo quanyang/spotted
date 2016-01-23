@@ -22,6 +22,7 @@ class CreateReportTable extends Migration
             $table->string('full_name');
             $table->integer('number');
             $table->string('email');
+            $table->string('pet_name');
             $table->integer('status')->unsigned();
             DB::statement('ALTER TABLE reports ADD location POINT' );
             $table->timestamps();
