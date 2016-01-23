@@ -75,7 +75,7 @@ class ImageController extends Controller {
         $fileName = $this->getFileNameFromUniqueId($uniqueId);
 
         if (empty($fileName)) {
-            //default
+            $app->render(500, ['Status' => 'An error occured.']);
             return;
         }
         $dir = 'uploads/';
