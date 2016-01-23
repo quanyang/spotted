@@ -63,7 +63,7 @@ class App {
              // Route /api/item/photo
             $app->group('/photo', function() use ($app) {
 
-                $imageController = new \spotted\Controllers\ImageController();
+                $imageController = new \spotted\controllers\ImageController();
 
                 // Get /api/item/photo/{photo}
                 // Note: Route maps to uploads/{photo}
