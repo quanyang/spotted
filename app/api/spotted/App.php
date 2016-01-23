@@ -5,6 +5,7 @@ namespace spotted;
 use spotted\models;
 use Slim\Slim;
 use SlimJson\Middleware;
+
 /**
  * Class App
  *
@@ -16,6 +17,7 @@ class App {
      *  Construct a new App instance
      */
     public function __construct() {
+        \Slim\Slim::registerAutoloader();
         $this->app = new Slim();
         $this->startSession();
         $this->setupMiddleWare();
