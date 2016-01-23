@@ -15,6 +15,7 @@ myApp.onPageInit('about', function (page) {
     // run createContentPage func after link was clicked
     $$('.create-page').on('click', function () {
         createContentPage();
+        document.getElementById("currLoc").innerHTML = myFunction(3,5);
     });
 });
 
@@ -77,3 +78,20 @@ function showhideLocation() {
     }
 }
 
+    function getLocation() {
+    console.log("in here");
+    if (navigator.geolocation) {
+        return navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        return "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    return "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;	
+}
+
+function myFunction(a, b) {
+    return a * b;
+    }
