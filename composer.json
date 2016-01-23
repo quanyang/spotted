@@ -7,7 +7,7 @@
         "classmap": ["app/api/spotted/models/", "app/api/spotted/controllers/"]
     },
     "require": {
-        "slim/slim": "*",
+        "slim/slim": "2.*",
         "dogancelik/slim-json": "dev-master",
         "illuminate/database": "*",
         "laravel/laravel": "*"
