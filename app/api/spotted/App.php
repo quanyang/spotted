@@ -1,8 +1,8 @@
 <?php
 
-namespace relive;
+namespace spotted;
 
-use relive\models;
+use spotted\models;
 use Slim\Slim;
 use SlimJson\Middleware;
 /**
@@ -49,7 +49,6 @@ class App {
 
     private function addDefaultRoutes() {
         $app = $this->app;
-
         $app->response->headers->set('Access-Control-Allow-Origin', '*');
 
         //  http://relive.space/api
