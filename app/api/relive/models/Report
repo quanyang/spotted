@@ -1,0 +1,19 @@
+<?php
+
+namespace relive\models;
+
+class Report extends \Illuminate\Database\Eloquent\Model {
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'reports';
+	protected  $primaryKey = 'report_id';
+	public $timestamps = false;
+	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+}
