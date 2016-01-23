@@ -49,7 +49,7 @@ function createContentPage() {
 function getLocation() {
     console.log("in here");
     if (navigator.geolocation) {
-        return navigator.geolocation.getCurrentPosition(showPosition);
+        return navigator.geolocation.getCurrentPosition(showPosition());
     } else { 
         return "Geolocation is not supported by this browser.";
     }
