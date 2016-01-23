@@ -1,6 +1,6 @@
 <?php
 
-namespace relive\models;
+namespace spotted\models;
 
 class User extends \Illuminate\Database\Eloquent\Model {
 	/**
