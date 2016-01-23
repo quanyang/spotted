@@ -141,14 +141,13 @@ class ImageController extends Controller {
         }
     }
 
-    private function saveToDatabase($fileName, $route, $reportId) {
+    private function saveToDatabase($fileName, $route) {
         try {
 
             $uniqueId = md5(uniqid("", true));
             $image = new \spotted\models\Image();
             $image->uniqueId = $uniqueId;
             $image->fileName = $filename;
-            $image->report_id = $reportId;
             $image->save();
 
             if ($image) {
@@ -175,7 +174,7 @@ class ImageController extends Controller {
         $compressPath =   $this->compress($data,$dir . $name);
 
         if (file_exists($compressPath)) {
-            return $this->saveToDatabase($name, $route, $owner);
+            return $this->saveToDatabase($name, $route);
         } else {
             return null;
         }
