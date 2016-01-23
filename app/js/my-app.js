@@ -46,6 +46,19 @@ function createContentPage() {
     );
 	return;
 }
+function getLocation() {
+    console.log("in here");
+    if (navigator.geolocation) {
+        return navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        return "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    return "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;  
+}
 
 function showhide() {
     var x = document.getElementById("mySelect").value;
