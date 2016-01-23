@@ -18,7 +18,7 @@ class App {
      */
     public function __construct() {
         \Slim\Slim::registerAutoloader();
-        $this->app = new Slim();
+        $this->app = new \Slim\Slim();
         $this->startSession();
         $this->setupMiddleWare();
         $this->addDefaultRoutes();
