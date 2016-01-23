@@ -19,3 +19,7 @@ div[class*="col-"] {
     width: 80px;
     cursor: pointer;
 }
+
+#map {
+        height: 230px;
+}
