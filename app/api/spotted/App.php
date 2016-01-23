@@ -16,7 +16,7 @@ class App {
      *  Construct a new App instance
      */
     public function __construct() {
-        $this->app = new Slim();
+        $this->app = new Slim\App();
         $this->startSession();
         $this->setupMiddleWare();
         $this->addDefaultRoutes();
