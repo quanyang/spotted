@@ -33,7 +33,7 @@ class ImageController extends Controller {
                 $app->render(415, ['Status' => 'Inappropriate file format']);
             } else {
                     //  Save to directory and db
-
+                echo $photoFile['tmp_name'];
                 $result = $this->saveToFile($photoFile['tmp_name'], $fileInfo['MIME-TYPE'], $fileInfo['DIRECTORY'], $fileInfo['ROUTE']);
                 if(is_null($result)) {
                     $app->render(500, array("Status" => "Unable to save file"));
