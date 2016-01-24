@@ -99,6 +99,7 @@ myApp.onPageInit('about', function(page) {
 });
 
 myApp.onPageInit('lost', function(page) {
+    $('#image-holder').src=this.photoURL;
     initMap();
     getLocation();
     $$('.confirm-ok').on('click', function() {
@@ -113,6 +114,7 @@ myApp.onPageInit('lost', function(page) {
 });
 
 myApp.onPageInit('spotted', function(page) {
+    $('#image-holder').src=this.photoURL;
     initMap();
     getLocation();
 });
