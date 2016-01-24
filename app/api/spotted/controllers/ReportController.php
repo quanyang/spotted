@@ -169,7 +169,8 @@ class ReportController extends Controller {
             $report->email = $email;
             $report->number = $number;
             $report->pet_name = $pet_name;
-            $report->setLocationAttribute($point);
+            $report->longitude = $longitude;
+            $report->latitude = $latitude;
             $report->save();
 
             if ($report) {
