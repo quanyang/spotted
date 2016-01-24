@@ -10,6 +10,21 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+
+$(document).ready(function(){
+
+function sendPic() {
+    alert("TEST");
+    // Send file here either by adding it to a `FormData` object 
+    // and sending that via XHR, or by simply passing the file into 
+    // the `send` method of an XHR instance.
+}
+
+    $('#file-input').change(function () {
+        sendPic();
+    });
+});
+
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function (page) {
     // run createContentPage func after link was clicked
