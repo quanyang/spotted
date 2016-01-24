@@ -16,11 +16,10 @@ class ReportController extends Controller {
 	public static function getNearByLostReport() {
 		$app = \Slim\Slim::getInstance();
         try {
-            $allPostVars = $app->request->post();
-            $longitude = @$allPostVars['longitude']?@trim(htmlspecialchars($allPostVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
-            $latitude = @$allPostVars['latitude']?@trim(htmlspecialchars($allPostVars['latitude'], ENT_QUOTES, 'UTF-8')):NULL;
+            $getVars = $app->request->get();
+            $longitude = @$getVars['longitude']?@trim(htmlspecialchars($getVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
+            $latitude = @$getVars['latitude']?@trim(htmlspecialchars($getVars['latitude'], ENT_QUOTES, 'UTF-8')):NULL;
             
-            echo "A";
             if ( !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)) {
             	$app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
