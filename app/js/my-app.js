@@ -10,7 +10,11 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+/* Form variables*/
+
 var photoURL = "";
+var longitude = 0;
+var latitude = 0;
 
 $(document).ready(function() {
 
@@ -32,7 +36,7 @@ $(document).ready(function() {
             success: function(data) {
                 // Should redirect to job page
                 $('#lost-form')[0].reset();
-                this.photoURL = data['photoURL'];
+                photoURL = data['photoURL'];
                 mainView.router.loadPage('lost.html');
             },
             error: function(data) {
@@ -69,7 +73,7 @@ $(document).ready(function() {
             success: function(data) {
                 // Should redirect to job page
                 $('#stray-form')[0].reset();
-                this.photoURL = data['photoURL'];
+                photoURL = data['photoURL'];
                 mainView.router.loadPage('spotted.html');
             },
             error: function(data) {
@@ -92,27 +96,63 @@ $(document).ready(function() {
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function(page) {
     // run createContentPage func after link was clicked
-    console.log("")
     $$('.create-page').on('click', function() {
         createContentPage();
     });
 });
 
+function lostPageSubmit() {
+
+    var formData = new FormData($('#lost-details-form')[0]);
+    formData.append("longitude", longitude);
+    formData.append("latitude", latitude);
+    formData.append("image", this.photoURL);
+
+
+
+    var url = "api/report/lost";
+        // the script where you handle the form input.
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData, // serializes the form's elements.
+            xhr: function() { // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
+                }
+                return myXhr;
+            },
+            success: function(data) {
+                // Should redirect to job page
+                console.log(data);
+                myApp.alert('Your request has been sent!', "", function() {
+                    mainView.router.load({
+                        url: 'index.html'
+                    });
+                });
+            },
+            error: function(data) {
+                console.log(data);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        }, 'json');
+
+
+}
+
 myApp.onPageInit('lost', function(page) {
+    $('#image-holder').attr('src',photoURL);
     initMap();
     getLocation();
     $$('.confirm-ok').on('click', function() {
-        myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?', function() {
-            myApp.alert('Your report has been sent!', "", function() {
-                mainView.router.load({
-                    url: 'index.html'
-                });
-            });
-        });
+        lostPageSubmit();
     });
 });
 
 myApp.onPageInit('spotted', function(page) {
+    $('#image-holder').attr('src',photoURL);
     initMap();
     getLocation();
 });
@@ -160,7 +200,6 @@ function createContentPage() {
 }
 
 function getLocation() {
-    console.log("in here");
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
@@ -232,6 +271,9 @@ function initMap() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+
+            longitude = position.coords.longitude;
+            latitude = position.coords.latitude;
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('Current location');
