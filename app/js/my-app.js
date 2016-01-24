@@ -145,8 +145,9 @@ myApp.onPageInit('lost', function(page) {
     $('#image-holder').attr('src',photoURL);
     initMap();
     getLocation();
-    $$('#lost-details-form').on('submit', function() {
+    $$('#lost-details-form').on('submit', function(ev) {
         lostPageSubmit();
+        return false;
     });
 });
 
