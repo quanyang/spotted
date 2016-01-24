@@ -152,15 +152,15 @@ myApp.onPageInit('lost', function(page) {
 function strayPageSubmit() {
 
     var formData = new FormData($('#stray-details-form-1')[0]);
-    var formData2 = new FormData($('#stray-details-form-2')[0]);
+
     formData.append("longitude", longitude);
     formData.append("latitude", latitude);
     var buffer = this.photoURL.split('/');
     formData.append("image", buffer[buffer.length-1]);
 
-    formData.append("fullName", formData2.get('fullName'));
-    formData.append("email", formData2.get('email'));
-    formData.append("number", formData2.get('number'));
+    formData.append("fullName", $('#stray-details-form-2 [name="fullName"]').val());
+    formData.append("email", $('#stray-details-form-2 [name="email"]').val());
+    formData.append("number", $('#stray-details-form-2 [name="number"]').val());
 
     var url = "api/report/stray";
         // the script where you handle the form input.
