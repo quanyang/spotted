@@ -176,11 +176,9 @@ function strayPageSubmit() {
             },
             success: function(data) {
                 // Should redirect to job page
-                 $$('.confirm-ok').on('click', function () {
-                    myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
-                        myApp.alert('Your report has been sent!',"", function () {
-                            mainView.router.load({ url: 'index.html' });
-                        });
+                myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
+                    myApp.alert('Your report has been sent!',"", function () {
+                        mainView.router.load({ url: 'index.html' });
                     });
                 });
             },
