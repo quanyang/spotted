@@ -33,7 +33,7 @@ $(document).ready(function() {
             success: function(data) {
                 // Should redirect to job page
                 this.photoURL = data['photoURL'];
-                mainView.router.load({pageName: 'upload'});
+                mainView.router.loadPage('upload.html');
             },
             error: function(data) {
                 console.log(data);
