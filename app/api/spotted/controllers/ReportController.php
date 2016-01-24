@@ -53,6 +53,7 @@ class ReportController extends Controller {
             $isLostReport = 0; //Stray Report
 
              if (!preg_match("/^-?\d{1,3}\.{1}\d*$/",$longitude) ||!preg_match("/^-?\d*\.{1}\d*$/", $latitude) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)||($category == 3 && !InputValidator::isValidStringInput($others,255,0) )|| !InputValidator::isValidStringInput($characteristics,5000,0)) {
+				echo "123"
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }	
@@ -74,7 +75,6 @@ class ReportController extends Controller {
 
 			$freq = ["Once or twice","Often","Always"];
 			$cate = ["Dog","Cat","Bird","Others"];
-			$point = $latitude.",".$longitude;
 
 			if ($category == 4) {
 				$category = $others;
@@ -82,7 +82,7 @@ class ReportController extends Controller {
 				$category = $cate[$category];
 			}
 
-            $report = new \spotter\models\Report();
+            $report = new \spotted\models\Report();
             $report->is_lost = $isLostReport;
             $report->status = $status;
             $report->frequency = $freq[$frequency];
