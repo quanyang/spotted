@@ -151,7 +151,7 @@ class ImageController extends Controller {
             $image->save();
 
             if ($image) {
-                $id = $image->id;
+                $id = $image->publicId;
                 return $id;
             }
             return null;
