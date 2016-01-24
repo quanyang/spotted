@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
     <!-- Path to your custom app styles-->
     <link rel="stylesheet" href="css/my-app.css">
+    <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css">
   </head>
   <body>
     <!-- Status bar overlay for fullscreen mode-->
@@ -39,7 +40,7 @@
             <!-- We have home navbar without left link-->
 <!--            <div class="center sliding"><font color= "#fff">Spotted</font></div>-->
             <div class="right">
-              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="fa fa-list-ul" style="color: #ffffff"></i></a>
             </div>
           </div>
         </div>
@@ -49,9 +50,9 @@
           <div data-page="index" class="page">
             <!-- Scrollable page content-->
             <div class="page-content">
-              <div class="content-block-title" ><img src="img/SP0TTED%20L0G0.png" style="width:100%;"></div>
+              <div class="content-block-title" ><img src="img/SP0TTED%20L0G0.png" style="width:80%; margin-left: 10%; margin-right: 10%;" ></div>
                 <div class="list-block">
-                <div class="list-block-label">Spotting skills are put to good use at Spotted. Get help spotting for your lost pet, or help to spot for stray and runaways.</div>
+                <div class="list-block-label" style="color:#000">Spotting skills are put to good use at Spotted. Get help spotting for your lost pet, or help to spot for stray and runaways.</div>
                 </div>
 <!--
               <div class="content-block">
@@ -62,19 +63,23 @@
               </div>
 -->
             <div class="content-block">
-                <div class="row no-gutter">
-                    <div class="col-50" style="border: none; background: transparent;" >
+                <div class="row">
+                    <div class="col-50" style="border: none; background: #E4E4E4; border-radius: 20px" >
                           <div class="image-upload">
                             <label for="file-input">
                                 <img src="img/u184.png"/>
+                                <h3 style="margin:0">Spot it</h3>
+                                <p style="margin:5px 0; color:#8f8f94;">Lost a pet?</p>
                             </label>
                             <input id="file-input" type="file"/>
                         </div>
                     </div>
-                    <div class="col-50" style="border: none; background: transparent;" >
+                    <div class="col-50" style="border: none; background: #E4E4E4; border-radius: 20px" >
                         <div class="image-upload">
                             <label for="file-input">
                                 <img src="img/u179.png"/>
+                                <h3 style="margin:0">Spotted</h3>
+                                <p style="margin:5px 0; color:#8f8f94;">Saw a stray?</p>
                             </label>
                             <input id="file-input" type="file"/>
                         </div>
