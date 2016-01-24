@@ -15,9 +15,8 @@ var photoURL = "";
 $(document).ready(function() {
 
 
-
     function sendStrayImage() {
-        var formData = new FormData($('#file-input2-form')[0]);
+        var formData = new FormData($('#stray-form')[0]);
         var url = "api/photo";
         // the script where you handle the form input.
         $.ajax({
@@ -32,8 +31,9 @@ $(document).ready(function() {
             },
             success: function(data) {
                 // Should redirect to job page
+                $('#stray-form')[0].reset();
                 this.photoURL = data['photoURL'];
-                mainView.router.loadPage('upload.html');
+                mainView.router.loadPage('spotted.html');
             },
             error: function(data) {
                 console.log(data);
@@ -43,7 +43,11 @@ $(document).ready(function() {
             processData: false
         }, 'json');
     }
-    $('#file-input2').change(function() {
+
+    $('#stray-image').click(function() {
+        $('#stray-form')[0].reset();
+    });
+    $('#stray-image').change(function() {
         sendStrayImage();
     });
 });
