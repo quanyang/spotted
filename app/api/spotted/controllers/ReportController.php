@@ -16,11 +16,22 @@ class ReportController extends Controller {
 	public static function getNearByLostReport() {
 		$app = \Slim\Slim::getInstance();
         try {
-            $allPostVars = $app->request->post();
-            $longitude = @$allPostVars['longitude']?@trim(htmlspecialchars($allPostVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
-            $latitude = @$allPostVars['latitude']?@trim(htmlspecialchars($allPostVars['latitude'], ENT_QUOTES, 'UTF-8')):NULL;
+            $getVars = $app->request->get();
+            $longitude = @$getVars['longitude']?@trim(htmlspecialchars($getVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
+            $latitude = @$getVars['latitude']?@trim(htmlspecialchars($getVars['latitude'], ENT_QUOTES, 'UTF-8')):NULL;
             
-            
+            if ( !preg_match("/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/",$longitude) ||!preg_match("/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/", $latitude) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)) {
+            	$app->render(400, ['Status' => 'Invalid input.' ]);
+                return;
+            }
+            $point = $latitude.",".$longitude;
+
+            $distance = 2;
+            $reports = \spotted\models\Report::distance($distance,$point)->get();
+            echo json_encode($reports, JSON_UNESCAPED_SLASHES);
+        } catch (\Exception $e) {
+        	print $e;
+            $app->render(500, ['Status' => 'An error occurred.' ]);
         }
 	}
 
@@ -41,7 +52,7 @@ class ReportController extends Controller {
             $status = 0; // default
             $isLostReport = 0; //Stray Report
 
-            if (!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
+            if (!preg_match("/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/",$longitude) ||!preg_match("/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/", $latitude) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
@@ -84,7 +95,7 @@ class ReportController extends Controller {
             $report->save();
 
             if ($report) {
-            	$image = \spotter\models\Image::('uniqueId','=',$image_id)->first();
+            	$image = \spotter\models\Image::where('uniqueId','=',$image_id)->first();
             	$image->report_id = $report->id;
             	$image->save();
             	echo json_encode($report, JSON_UNESCAPED_SLASHES);
@@ -93,6 +104,7 @@ class ReportController extends Controller {
             }
 
         } catch (\Exception $e) {
+        	print $e;
             $app->render(500, ['Status' => 'An error occurred.' ]);
         }
     }
@@ -116,7 +128,7 @@ class ReportController extends Controller {
             $status = 0; // default
             $isLostReport = 1; //Lost Report
 
-            if (!InputValidator::isValidStringInput($pet_name,255,0) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
+            if (!preg_match("/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/",$longitude) ||!preg_match("/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/", $latitude) ||!InputValidator::isValidStringInput($pet_name,255,0) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
@@ -160,7 +172,7 @@ class ReportController extends Controller {
             $report->save();
 
             if ($report) {
-				$image = \spotter\models\Image::('uniqueId','=',$image_id)->first();
+				$image = \spotter\models\Image::where('uniqueId','=',$image_id)->first();
             	$image->report_id = $report->id;
             	$image->save();
             	echo json_encode($report, JSON_UNESCAPED_SLASHES);
