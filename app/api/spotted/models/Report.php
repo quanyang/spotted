@@ -24,7 +24,7 @@ class Report extends Model
  
  
     public function setLocationAttribute($value) {
-        $this->attributes['location'] = DB::raw("POINT($value)");
+        $this->attributes['location'] = Model::whereRaw("POINT($value)");
     }
  
     public function getLocationAttribute($value){
