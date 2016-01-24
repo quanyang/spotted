@@ -174,7 +174,7 @@ class ReportController extends Controller {
             $report->save();
 
             if ($report) {
-				$image = \spotted\models\Image::where('uniqueId','=',$image_id)->first();
+				$image = \spotted\models\Image::where('publicId','=',$image_id)->first();
             	$image->report_id = $report->id;
             	$image->save();
             	echo json_encode($report, JSON_UNESCAPED_SLASHES);
