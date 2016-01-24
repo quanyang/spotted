@@ -174,6 +174,7 @@ class ImageController extends Controller {
 
         $compressPath = $this->compress($data,$dir . $name);
         echo $compressPath;
+        return $compressPath;
         if (file_exists($compressPath)) {
             $a = $this->saveToDatabase($name, $route);
             echo $a;
