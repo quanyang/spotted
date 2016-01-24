@@ -106,7 +106,8 @@ function lostPageSubmit() {
     var formData = new FormData($('#lost-details-form')[0]);
     formData.append("longitude", longitude);
     formData.append("latitude", latitude);
-    formData.append("image", this.photoURL);
+    var buffer = this.photoURL.split('/');
+    formData.append("image", buffer[buffer.length-1]);
 
 
 
