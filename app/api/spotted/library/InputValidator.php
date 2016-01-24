@@ -6,7 +6,7 @@ class InputValidator {
 
 	public static function isValidIntValBetween($input, $start,$end) {
 		// inclusive 
-		return (!empty($input) && !is_null($input) && intval($input) >= $start && intval($input) <= $end); 
+		return (intval($input) >= $start && intval($input) <= $end); 
 	}
 
 	public static function isValidStringInput($input,$max_length=255,$min_length=0) {

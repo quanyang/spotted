@@ -133,7 +133,7 @@ class ReportController extends Controller {
             	echo "1";
             } 
 
-            if ($category == 3 && !InputValidator::isValidStringInput($others,255,0) ){
+            if ((*$category == 3 && !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)){
             	echo "2";
 
             } 
