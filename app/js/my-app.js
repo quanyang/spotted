@@ -33,7 +33,7 @@ $(document).ready(function() {
                 // Should redirect to job page
                 $('#lost-form')[0].reset();
                 this.photoURL = data['photoURL'];
-                mainView.router.loadPage('upload.html');
+                mainView.router.loadPage('lost.html');
             },
             error: function(data) {
                 console.log(data);
@@ -98,7 +98,7 @@ myApp.onPageInit('about', function(page) {
     });
 });
 
-myApp.onPageInit('upload', function(page) {
+myApp.onPageInit('lost', function(page) {
     initMap();
     getLocation();
     $$('.confirm-ok').on('click', function() {

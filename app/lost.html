@@ -1,0 +1,129 @@
+
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<!-- Top Navbar-->
+<div class="navbar" style="background:#35BEC1;">
+  <div class="navbar-inner">
+    <div class="left"><a href="#" class="back link"> <i class="fa fa-chevron-left" style="color: #ffffff"></i></a></div>
+    <div class="center sliding"><font color="#fff">Spotted</font></div>
+    <div class="right">
+      <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="fa fa-list-ul" style="color: #ffffff"></i></a>
+    </div>
+  </div>
+</div>
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="lost" class="page">
+    <!-- Scrollable page content-->
+    <div class="page-content">
+    <div class="content-block-title">Pet Information</div>       
+      <div class="content-block">
+            <div class="content-block-inner">
+                 <div class="row  no-gutter" style="margin-bottom: 0px">
+                  <div class="col-33" style="border: none;" ><img src="http://goo.gl/pB9rpQ"/ style="width:80px;"></div>
+                  <div class="col-66" style="border: none;">
+<textarea name="characteristics" style="width: 100%; border: none; border-color: transparent; " rows= "4" placeholder="Characteristics of stray animals Ie temperament, physical features .etc">
+</textarea></div>
+                </div>
+            </div>
+      </div>
+        <div class="content-block-title">Name of pet</div>       
+      <div class="list-block">
+          <ul>
+            <li>    
+            <div class="item-content">
+                <div class="item-inner">
+                          <div class="item-input">
+                              <input type="text" name="name" placeholder="Pet Name">        
+                          </div>
+                </div>
+            </div>
+            </li>
+        </ul>
+      </div>
+     <div class="content-block-title">Last Seen Location</div>       
+      <div class="list-block">
+          <ul>
+            <li>    
+            <div class="item-content">
+                <div class="item-inner">
+                          <div class="item-input">
+                            <select id="myLocation" onchange="showhideLocation()">
+                                <option value="currentLoc" id="currLoc" selected></option>
+                                <option value="editLoc">Update location</option>
+                            </select>
+                              <input type="text" name="name" placeholder="Update Location" id="newLoc" style="display:none;">
+                              
+                          </div>
+                </div>
+            </div>
+            </li>
+            <li>
+                    <div id="map"></div>
+            </li>
+        </ul>
+<!--        <p class="list-block-label" id="currLoc"></p>-->
+      </div>
+        
+      <div class="content-block-title">Pet Category</div>     
+        <div class="list-block">
+            <ul>
+                <li>    
+                    <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-input">
+                            <select id="category" onchange="showhide()">
+                                <option value="Dog" selected>Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Bird">Bird</option>
+                                <option value="Other">Others</option>
+                            </select>
+                              <input type="text" name="others" placeholder="Others" id="others" style="display:none;">
+                          </div>
+                        </div>
+                      </div>    
+                </li>
+            </ul>
+        </div>
+    
+      <div class="content-block-title">Owner Information</div>    
+      <form id="my-form" class="list-block">
+          <ul>
+            <li>
+              <div class="item-content">
+                <div class="item-media"><i class="icon icon-form-name"></i></div>  
+                <div class="item-inner">
+                  <div class="item-input">
+                    <input type="text" name="fullName" placeholder="Name">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content">
+                <div class="item-media"><i class="icon icon-form-tel"></i></div>  
+                <div class="item-inner">
+                  <div class="item-input">
+                    <input type="text" name="number" placeholder="Phone Number">
+                  </div>
+                </div>
+              </div>
+            </li>  
+             <li>
+              <div class="item-content">
+                <div class="item-media"><i class="icon icon-form-email"></i></div>
+                <div class="item-inner">
+                  <div class="item-input">
+                    <input type="text" name="email" placeholder="Email">
+                  </div>
+                </div>
+              </div>
+            </li>  
+          </ul>
+        </form>    
+         <a class="button button-big confirm-ok" style="color:#fff; border:none" >Submit</a>
+    </div>
+     
+  </div>
+</div>
+
+ <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAJ5wLBb6xJIcUjGKA6QRz6WhGZb9kahOM&callback=initMap"></script>
