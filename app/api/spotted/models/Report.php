@@ -3,6 +3,7 @@
 namespace spotted\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Expression as raw;
 
 class Report extends Model
 {
@@ -38,8 +39,6 @@ class Report extends Model
         foreach($this->geofields as $column){
             $raw .= ' astext('.$column.') as '.$column.' ';
         }
-
-        use Illuminate\Database\Query\Expression as raw;
         return parent::newQuery($excludeDeleted)->addSelect('*',new raw($raw));
     }
 
