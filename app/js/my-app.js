@@ -176,11 +176,9 @@ function strayPageSubmit() {
             },
             success: function(data) {
                 // Should redirect to job page
-                myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
-                    myApp.alert('Your report has been sent!',"", function () {
+                 myApp.alert('Your report has been sent!',"", function () {
                         mainView.router.load({ url: 'index.html' });
                     });
-                });
             },
             error: function(data) {
                 console.log(data);
@@ -201,7 +199,10 @@ myApp.onPageInit('spotted', function(page) {
 myApp.onPageInit('spotted-2', function (page) {
     $$('#stray-details-form-2').submit( function(ev) {
         ev.preventDefault();
-        strayPageSubmit();
+         myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
+                    strayPageSubmit();
+                });
+        
         return false;
     });
 });
