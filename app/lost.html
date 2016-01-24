@@ -22,7 +22,7 @@
            <div class="row  no-gutter" style="margin-bottom: 0px">
             <div class="col-33" style="border: none;" ><img id="image-holder" src="http://goo.gl/pB9rpQ"/ style="width:80px;"></div>
             <div class="col-66" style="border: none;">
-              <textarea name="characteristics" style="width: 100%; border: none; border-color: transparent; " rows= "4" placeholder="Characteristics of stray animals Ie temperament, physical features .etc"></textarea></div>
+              <textarea name="characteristics" style="width: 100%; border: none; border-color: transparent; " rows= "4" placeholder="Characteristics of stray animals Ie temperament, physical features .etc" required maxlength="5000"></textarea></div>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
               <div class="item-content">
                 <div class="item-inner">
                   <div class="item-input">
-                    <input type="text" name="pet_name" placeholder="Pet Name">        
+                    <input type="text" name="pet_name" placeholder="Pet Name" required maxlength="255">        
                   </div>
                 </div>
               </div>
@@ -71,7 +71,7 @@
               <div class="item-content">
                 <div class="item-inner">
                   <div class="item-input">
-                    <select id="category" onchange="showhide()">
+                    <select id="category" onchange="showhide()" required>
                       <option value="0" selected>Dog</option>
                       <option value="1">Cat</option>
                       <option value="2">Bird</option>
@@ -93,7 +93,7 @@
               <div class="item-media"><i class="icon icon-form-name"></i></div>  
               <div class="item-inner">
                 <div class="item-input">
-                  <input type="text" name="fullName" placeholder="Name">
+                  <input type="text" name="fullName" placeholder="Name" required maxlength="255">
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@
               <div class="item-media"><i class="icon icon-form-tel"></i></div>  
               <div class="item-inner">
                 <div class="item-input">
-                  <input type="text" name="number" placeholder="Phone Number">
+                  <input type="text" name="number" type="number" placeholder="Phone Number" required maxlength="10">
                 </div>
               </div>
             </div>
@@ -113,7 +113,7 @@
               <div class="item-media"><i class="icon icon-form-email"></i></div>
               <div class="item-inner">
                 <div class="item-input">
-                  <input type="text" name="email" placeholder="Email">
+                  <input type="text" name="email" type="email" placeholder="Email" required maxlength="255">
                 </div>
               </div>
             </div>
