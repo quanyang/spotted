@@ -37,7 +37,6 @@ class ImageController extends Controller {
                 if(is_null($result)) {
                     $app->render(500, array("Status" => "Unable to save file"));
                 } else {
-                    print $result;
                     $app->render(200, array("Status" => "OK", "photoURL" => $result));
                 }
             }
@@ -130,7 +129,7 @@ class ImageController extends Controller {
     public function getFileNameFromUniqueId($uniqueId) {
         try {
 
-            $Image = \spotted\models\Image::where('uniqueId','=',$uniqueId)->first();
+            $Image = \spotted\models\Image::where('publicId','=',$uniqueId)->first();
             if (!$Image) {
                 return null;
             }
