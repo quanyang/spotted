@@ -33,11 +33,11 @@ class ImageController extends Controller {
                 $app->render(415, ['Status' => 'Inappropriate file format']);
             } else {
                     //  Save to directory and db
-
                 $result = $this->saveToFile($photoFile['tmp_name'], $fileInfo['MIME-TYPE'], $fileInfo['DIRECTORY'], $fileInfo['ROUTE']);
                 if(is_null($result)) {
                     $app->render(500, array("Status" => "Unable to save file"));
                 } else {
+                    print $result;
                     $app->render(200, array("Status" => "OK", "photoURL" => $result->photoUrl));
                 }
             }
@@ -155,7 +155,8 @@ class ImageController extends Controller {
                 return $id;
             }
             return null;
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
+            echo $e;
             return null;
         }
     }
@@ -171,8 +172,7 @@ class ImageController extends Controller {
             $name = "img-" . $id . '.' . $ext;
         }
 
-        $compressPath =   $this->compress($data,$dir . $name);
-
+        $compressPath = $this->compress($data,$dir . $name);
         if (file_exists($compressPath)) {
             return $this->saveToDatabase($name, $route);
         } else {
@@ -183,14 +183,14 @@ class ImageController extends Controller {
     private static function compress($source,$dest) {
         $info = getimagesize($source); 
         if ($info['mime'] == 'image/jpeg') {
-            $image = imagecreatefromjpeg($source);
+            $image = \imagecreatefromjpeg($source);
         } elseif ($info['mime'] == 'image/gif') {
-            $image = imagecreatefromgif($source); 
+            $image = \imagecreatefromgif($source); 
         } elseif ($info['mime'] == 'image/png') {
-            $image = imagecreatefrompng($source); 
+            $image = \imagecreatefrompng($source); 
         } 
 
-        imagejpeg($image, $dest, COMPRESSION_RATE); 
+        imagejpeg($image, $dest, ImageController::COMPRESSION_RATE); 
         imagedestroy($image);
         return $dest;
     }
