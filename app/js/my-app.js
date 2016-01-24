@@ -158,8 +158,9 @@ function strayPageSubmit() {
     var buffer = this.photoURL.split('/');
     formData.append("image", buffer[buffer.length-1]);
 
-    console.log(formData);
-    console.log(formData2);
+    for (var key in formData2) {
+        formData.append(key, formData2[key]);
+    }
 
     var url = "api/report/stray";
         // the script where you handle the form input.
