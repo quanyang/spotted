@@ -60,20 +60,10 @@ class App {
             });
 
             $app->group('/report', function() use ($app) {
-                $appp->group('/stray', function() use ($app) {
-                    $app->get('/all', 'spotted\controllers\ReportController::getAllStrayReports');
-                    $app->post('/', 'spotted\controllers\ReportController::newStrayReport');
-                });
-
-                $appp->group('/lost', function() use ($app) {
-                    $app->get('/all', 'spotted\controllers\ReportController::getAllLostReports');
-                    $app->get('/', 'spotted\controllers\ReportController::getNearByLostReport');
-                    $app->post('/', 'spotted\controllers\ReportController::newLostReport');
-                
-                });
-
-                
-                
+                $app->get('/all', 'spotted\controllers\ReportController::getAllLostReports');
+                $app->get('/lost', 'spotted\controllers\ReportController::getNearByLostReport');
+                $app->post('/lost', 'spotted\controllers\ReportController::newLostReport');
+                $app->post('/stray', 'spotted\controllers\ReportController::newStrayReport');
             });
 
              // Route /api/item/photo
