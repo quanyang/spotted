@@ -140,16 +140,19 @@ class ReportController extends Controller {
             }
 
             if ( !InputValidator::isValidStringInput($email,255,0) && !InputValidator::isValidEmail($email)) {
+            	echo "EMAIL";
             	$app->render(400, ['Status' => 'Invalid input.' ]);
             	return;
             }
 
 			if (!InputValidator::isValidStringInput($fullName,255,0) ) {
+				echo "NAME";
 				$app->render(400, ['Status' => 'Invalid input.' ]);
 				return;
 			}    
 
 			if (!InputValidator::isValidStringInput($number,10,8) || !preg_match("/^[0-9]{8,10}$/",$number) ) {
+				echo "NUMBER";
 				$app->render(400, ['Status' => 'Invalid input.' ]);
 				return;
 			}      
@@ -164,7 +167,7 @@ class ReportController extends Controller {
 				$category = $cate[$category];
 			}
 
-            $report = new \spotter\models\Report();
+            $report = new \spotted\models\Report();
             $report->is_lost = $isLostReport;
             $report->status = $status;
             $report->frequency = $freq[$frequency];
@@ -178,7 +181,7 @@ class ReportController extends Controller {
             $report->save();
 
             if ($report) {
-				$image = \spotter\models\Image::where('uniqueId','=',$image_id)->first();
+				$image = \spotted\models\Image::where('uniqueId','=',$image_id)->first();
             	$image->report_id = $report->id;
             	$image->save();
             	echo json_encode($report, JSON_UNESCAPED_SLASHES);
