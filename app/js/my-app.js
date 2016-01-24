@@ -63,6 +63,11 @@ myApp.onPageInit('upload', function (page) {
     });
 });
 
+myApp.onPageInit('spotted', function (page) {
+    initMap();
+    getLocation();
+});
+
 // Generate dynamic page
 var dynamicPageIndex = 0;
 function createContentPage() {
