@@ -133,7 +133,7 @@ class ReportController extends Controller {
             	echo "TEST";
             } 
 
-            if (($category == 3 && !InputValidator::isValidStringInput($others,255,0) ) !InputValidator::isValidStringInput($characteristics,5000,0)) {
+            if (($category == 3 && !InputValidator::isValidStringInput($others,255,0) )|| !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 echo "BYE";
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
