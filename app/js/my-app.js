@@ -12,69 +12,75 @@ var mainView = myApp.addView('.view-main', {
 
 var photoURL = "";
 
-$(document).ready(function(){
+$(document).ready(function() {
+
+
+
     function sendStrayImage() {
         var formData = new FormData($('#file-input2-form')[0]);
-        var url = "api/photo"; 
-    // the script where you handle the form input.
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: formData, // serializes the form's elements.
-      xhr: function() {  // Custom XMLHttpRequest
-        var myXhr = $.ajaxSettings.xhr();
-            if(myXhr.upload){ // Check if upload property exists
-            }
-            return myXhr;
-        },
-        success: function(data){
-        // Should redirect to job page
-        this.photoURL = data['photoURL'];
-        //post to upload page?
-        },
-        error: function(data){
-            console.log(data);
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-    }, 'json');
-}
-$('#file-input2').change(function () {
-    sendStrayImage();
-});
+        var url = "api/photo";
+        // the script where you handle the form input.
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData, // serializes the form's elements.
+            xhr: function() { // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
+                }
+                return myXhr;
+            },
+            success: function(data) {
+                // Should redirect to job page
+                this.photoURL = data['photoURL'];
+                mainView.router.load({pageName: 'upload'});
+            },
+            error: function(data) {
+                console.log(data);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        }, 'json');
+    }
+    $('#file-input2').change(function() {
+        sendStrayImage();
+    });
 });
 
 // Callbacks to run specific code for specific pages, for example for About page:
-myApp.onPageInit('about', function (page) {
+myApp.onPageInit('about', function(page) {
     // run createContentPage func after link was clicked
     console.log("")
-    $$('.create-page').on('click', function () {
+    $$('.create-page').on('click', function() {
         createContentPage();
     });
 });
 
-myApp.onPageInit('upload', function (page) {
+myApp.onPageInit('upload', function(page) {
     initMap();
     getLocation();
-    $$('.confirm-ok').on('click', function () {
-        myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
-            myApp.alert('Your report has been sent!',"", function () {
-                mainView.router.load({ url: 'index.html' });
+    $$('.confirm-ok').on('click', function() {
+        myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?', function() {
+            myApp.alert('Your report has been sent!', "", function() {
+                mainView.router.load({
+                    url: 'index.html'
+                });
             });
         });
     });
 });
 
-myApp.onPageInit('spotted', function (page) {
+myApp.onPageInit('spotted', function(page) {
     initMap();
     getLocation();
 });
 
 // Generate dynamic page
 var dynamicPageIndex = 0;
+
 function createContentPage() {
-	mainView.router.loadContent(
+    mainView.router.loadContent(
         '<!-- Top Navbar-->' +
         '<div class="navbar">' +
         '  <div class="navbar-inner">' +
@@ -96,14 +102,15 @@ function createContentPage() {
         '    </div>' +
         '  </div>' +
         '</div>'
-        );
-return;
+    );
+    return;
 }
+
 function getLocation() {
     console.log("in here");
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
+    } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
@@ -111,12 +118,14 @@ function getLocation() {
 function showPosition(position) {
     var x = document.getElementById("currLoc");
 
-    var latlng = new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
+    var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     var geocoder = geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+    geocoder.geocode({
+        'latLng': latlng
+    }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             if (results[1]) {
-                x.innerHTML = results[1].formatted_address + " (Current location) "  ;
+                x.innerHTML = results[1].formatted_address + " (Current location) ";
             }
         }
     });
@@ -129,8 +138,7 @@ function showhide() {
 
     if ((div1.style.display !== "none") && (x == 'Other')) {
         div1.style.display = "none";
-    }
-    else if ((div1.style.display == "none") && (x == 'Other')){
+    } else if ((div1.style.display == "none") && (x == 'Other')) {
         div1.style.display = "block";
         div2.style.display = "none";
     }
@@ -144,8 +152,7 @@ function showhideLocation() {
 
     if ((div1.style.display !== "none") && (x == 'editLoc')) {
         div1.style.display = "none";
-    }
-    else if ((div1.style.display == "none") && (x == 'editLoc')){
+    } else if ((div1.style.display == "none") && (x == 'editLoc')) {
         div1.style.display = "block";
         div2.style.display = "none";
         div3.style.display = "none";
@@ -154,36 +161,40 @@ function showhideLocation() {
 
 function initMap() {
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 17
-});
-  var infoWindow = new google.maps.InfoWindow({map: map});
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: -34.397,
+            lng: 150.644
+        },
+        zoom: 17
+    });
+    var infoWindow = new google.maps.InfoWindow({
+        map: map
+    });
 
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-    };
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
 
-    infoWindow.setPosition(pos);
-    infoWindow.setContent('Current location');
-    map.setCenter(pos);
-}, function() {
-  handleLocationError(true, infoWindow, map.getCenter());
-});
-} else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-}
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Current location');
+            map.setCenter(pos);
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-    'Error: The Geolocation service failed.' :
-    'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
 }
-
