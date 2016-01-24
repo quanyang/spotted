@@ -129,30 +129,22 @@ class ReportController extends Controller {
             $isLostReport = 1; //Lost Report
 
 
-            if (!preg_match("/^-?\d{1,3}\.{1}\d*$/",$longitude) ||!preg_match("/^-?\d*\.{1}\d*$/", $latitude)||!InputValidator::isValidStringInput($pet_name,255,0) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)) {
-            	echo "TEST";
-            } 
-
-            if (($category == 3 && !InputValidator::isValidStringInput($others,255,0) )|| !InputValidator::isValidStringInput($characteristics,5000,0)) {
-                echo "BYE";
+            if (!preg_match("/^-?\d{1,3}\.{1}\d*$/",$longitude) ||!preg_match("/^-?\d*\.{1}\d*$/", $latitude)||!InputValidator::isValidStringInput($pet_name,255,0) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)||($category == 3 && !InputValidator::isValidStringInput($others,255,0) )|| !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
 
             if ( !InputValidator::isValidStringInput($email,255,0) && !InputValidator::isValidEmail($email)) {
-            	echo "EMAIL";
             	$app->render(400, ['Status' => 'Invalid input.' ]);
             	return;
             }
 
 			if (!InputValidator::isValidStringInput($fullName,255,0) ) {
-				echo "NAME";
 				$app->render(400, ['Status' => 'Invalid input.' ]);
 				return;
 			}    
 
 			if (!InputValidator::isValidStringInput($number,10,8) || !preg_match("/^[0-9]{8,10}$/",$number) ) {
-				echo "NUMBER";
 				$app->render(400, ['Status' => 'Invalid input.' ]);
 				return;
 			}      
