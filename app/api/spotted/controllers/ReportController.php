@@ -25,7 +25,7 @@ class ReportController extends Controller {
                 return;
             }
             $point = $latitude.",".$longitude;
-            $reports = \spotted\models\Report::distance(1,'$point')->get();
+            $reports = \spotted\models\Report::distance(1,"'".$point."'")->get();
             echo json_encode($reports, JSON_UNESCAPED_SLASHES);
         } catch (\Exception $e) {
         	print $e;
