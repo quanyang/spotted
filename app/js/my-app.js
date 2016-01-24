@@ -109,8 +109,6 @@ function lostPageSubmit() {
     var buffer = this.photoURL.split('/');
     formData.append("image", buffer[buffer.length-1]);
 
-
-
     var url = "api/report/lost";
         // the script where you handle the form input.
         $.ajax({
@@ -127,9 +125,9 @@ function lostPageSubmit() {
                 // Should redirect to job page
                 console.log(data);
                 myApp.alert('Your request has been sent!', "", function() {
-                    mainView.router.load({
+                  /*  mainView.router.load({
                         url: 'index.html'
-                    });
+                    });*/
                 });
             },
             error: function(data) {
