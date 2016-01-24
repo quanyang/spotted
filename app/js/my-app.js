@@ -10,6 +10,8 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+var photoURL = "";
+
 $(document).ready(function(){
     function sendStrayImage() {
         var formData = new FormData($('#file-input2-form')[0]);
@@ -27,7 +29,8 @@ $(document).ready(function(){
         },
         success: function(data){
         // Should redirect to job page
-        console.log(data['photoURL']);
+        this.photoURL = data['photoURL'];
+        //post to upload page?
         },
         error: function(data){
             console.log(data);
