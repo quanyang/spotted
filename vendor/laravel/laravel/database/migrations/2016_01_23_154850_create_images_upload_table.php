@@ -20,12 +20,6 @@ class CreateImagesUploadTable extends Migration
             $table->integer('report_id')->unsigned();
             $table->timestamps();
         });
-
-
-        Schema::table('images', function($table) {
-            $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
-        });
-
     }
 
     /**
