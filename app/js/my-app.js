@@ -117,6 +117,18 @@ myApp.onPageInit('spotted', function(page) {
     getLocation();
 });
 
+
+myApp.onPageInit('spotted-2', function (page) {
+        
+    $$('.confirm-ok').on('click', function () {
+        myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
+            myApp.alert('Your report has been sent!',"", function () {
+                mainView.router.load({ url: 'index.html' });
+            });
+        });
+    });
+});
+
 // Generate dynamic page
 var dynamicPageIndex = 0;
 
@@ -234,8 +246,17 @@ function initMap() {
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-        'Error: The Geolocation service failed.' :
-        'Error: Your browser doesn\'t support geolocation.');
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.');
 }
+
+function onClickFunction(){
+         myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
+            myApp.alert('Your report has been sent!',"", function () {
+                mainView.router.load({ url: 'index.html' });
+            });
+        });
+    }
+
