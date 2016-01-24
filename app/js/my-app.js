@@ -15,6 +15,43 @@ var photoURL = "";
 $(document).ready(function() {
 
 
+    function sendFoundPetImage() {
+        var formData = new FormData($('#lost-form')[0]);
+        var url = "api/photo";
+        // the script where you handle the form input.
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData, // serializes the form's elements.
+            xhr: function() { // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
+                }
+                return myXhr;
+            },
+            success: function(data) {
+                // Should redirect to job page
+                $('#lost-form')[0].reset();
+                this.photoURL = data['photoURL'];
+                mainView.router.loadPage('upload.html');
+            },
+            error: function(data) {
+                console.log(data);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        }, 'json');
+    }
+
+    $('#lost-image').click(function() {
+        $('#lost-form')[0].reset();
+    });
+    $('#lost-image').change(function() {
+        sendFoundPetImage();
+    });
+
+
     function sendStrayImage() {
         var formData = new FormData($('#stray-form')[0]);
         var url = "api/photo";
