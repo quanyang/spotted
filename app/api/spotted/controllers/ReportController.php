@@ -20,7 +20,7 @@ class ReportController extends Controller {
             $longitude = @$getVars['longitude']?@trim(htmlspecialchars($getVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
             $latitude = @$getVars['latitude']?@trim(htmlspecialchars($getVars['latitude'], ENT_QUOTES, 'UTF-8')):NULL;
             
-            if ( !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)) {
+            if ( !is_int(intval($longtitude)) ||!is_int(intval($latitude)) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)) {
             	$app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
@@ -50,7 +50,7 @@ class ReportController extends Controller {
             $status = 0; // default
             $isLostReport = 0; //Stray Report
 
-            if (!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
+            if (!is_int(intval($longtitude)) ||!is_int(intval($latitude)) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
@@ -126,7 +126,7 @@ class ReportController extends Controller {
             $status = 0; // default
             $isLostReport = 1; //Lost Report
 
-            if (!InputValidator::isValidStringInput($pet_name,255,0) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
+            if (!is_int(intval($longtitude)) ||!is_int(intval($latitude)) ||!InputValidator::isValidStringInput($pet_name,255,0) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
