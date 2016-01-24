@@ -155,7 +155,6 @@ class ImageController extends Controller {
             }
             return null;
         } catch (\Exception $e) {
-            echo $e;
             return null;
         }
     }
