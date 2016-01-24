@@ -41,7 +41,7 @@ class Report extends Model
             $raw .= ' astext('.$column.') as '.$column.' ';
         }
  
-        return parent::newQuery($excludeDeleted)->addSelect('*',DB::raw($raw));
+        return parent::newQuery($excludeDeleted)->addSelect('*',\DB::raw($raw));
     }
 
     public function scopeDistance($query,$dist,$location)
