@@ -139,15 +139,13 @@ function lostPageSubmit() {
             contentType: false,
             processData: false
         }, 'json');
-
-
 }
 
 myApp.onPageInit('lost', function(page) {
     $('#image-holder').attr('src',photoURL);
     initMap();
     getLocation();
-    $$('.confirm-ok').on('click', function() {
+    $$('#lost-details-form').on('submit', function() {
         lostPageSubmit();
     });
 });
