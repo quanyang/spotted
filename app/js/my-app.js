@@ -124,9 +124,7 @@ function lostPageSubmit() {
             success: function(data) {
                 // Should redirect to job page
                 myApp.alert('Your request has been sent!', "", function() {
-                    mainView.router.back({
-                        url: 'index.html'
-                    });
+                    location.href="http://128.199.90.231/index.html";
                 });
             },
             error: function(data) {
@@ -177,7 +175,7 @@ function strayPageSubmit() {
             success: function(data) {
                 // Should redirect to job page
                  myApp.alert('Your report has been sent!',"", function () {
-                        mainView.router.reloadPage('index.html');
+                        location.href="http://128.199.90.231/index.html";
                     });
             },
             error: function(data) {
