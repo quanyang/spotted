@@ -10,7 +10,11 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+/* Form variables*/
+
 var photoURL = "";
+var longitude = 0;
+var latitude = 0;
 
 $(document).ready(function() {
 
@@ -232,6 +236,9 @@ function initMap() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+
+            longitude = position.coords.longitude;
+            latitude = position.coords.latitude;
 
             infoWindow.setPosition(pos);
             infoWindow.setContent('Current location');
