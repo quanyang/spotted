@@ -10,19 +10,36 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
-
 $(document).ready(function(){
-
-function sendPic() {
-    alert("TEST");
-    // Send file here either by adding it to a `FormData` object 
-    // and sending that via XHR, or by simply passing the file into 
-    // the `send` method of an XHR instance.
+    function sendStrayImage() {
+        var formData = new FormData($('#file-input2-form')[0]);
+        var url = "api/photo"; 
+    // the script where you handle the form input.
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: formData, // serializes the form's elements.
+      xhr: function() {  // Custom XMLHttpRequest
+        var myXhr = $.ajaxSettings.xhr();
+            if(myXhr.upload){ // Check if upload property exists
+            }
+            return myXhr;
+        },
+        success: function(data){
+        // Should redirect to job page
+        console.log(data);
+        },
+        error: function(data){
+            console.log(data);
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    }, 'json');
 }
-
-    $('#file-input').change(function () {
-        sendPic();
-    });
+$('#file-input2').change(function () {
+    sendStrayImage();
+});
 });
 
 // Callbacks to run specific code for specific pages, for example for About page:
@@ -71,8 +88,8 @@ function createContentPage() {
         '    </div>' +
         '  </div>' +
         '</div>'
-    );
-	return;
+        );
+return;
 }
 function getLocation() {
     console.log("in here");
@@ -85,16 +102,16 @@ function getLocation() {
 
 function showPosition(position) {
     var x = document.getElementById("currLoc");
-      
-            var latlng = new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
-            var geocoder = geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[1]) {
-                        x.innerHTML = results[1].formatted_address + " (Current location) "  ;
-                    }
-                }
-            });
+
+    var latlng = new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
+    var geocoder = geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+                x.innerHTML = results[1].formatted_address + " (Current location) "  ;
+            }
+        }
+    });
 }
 
 function showhide() {
@@ -128,11 +145,11 @@ function showhideLocation() {
 }
 
 function initMap() {
-   
+
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -34.397, lng: 150.644},
     zoom: 17
-  });
+});
   var infoWindow = new google.maps.InfoWindow({map: map});
 
   // Try HTML5 geolocation.
@@ -141,24 +158,24 @@ function initMap() {
       var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
-      };
+    };
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Current location');
-      map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
-  } else {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent('Current location');
+    map.setCenter(pos);
+}, function() {
+  handleLocationError(true, infoWindow, map.getCenter());
+});
+} else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
-  }
+}
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.');
 }
 

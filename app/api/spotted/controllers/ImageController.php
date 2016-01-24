@@ -190,7 +190,7 @@ class ImageController extends Controller {
             $image = imagecreatefrompng($source); 
         } 
 
-        imagejpeg($image, $dest, COMPRESSION_RATE); 
+        imagejpeg($image, $dest, ImageController::COMPRESSION_RATE); 
         imagedestroy($image);
         return $dest;
     }
