@@ -147,7 +147,7 @@ class ImageController extends Controller {
             $uniqueId = md5(uniqid("", true));
             $image = new \spotted\models\Image();
             $image->uniqueId = $uniqueId;
-            $image->fileName = $filename;
+            $image->file_name = $filename;
             $image->save();
 
             if ($image) {
