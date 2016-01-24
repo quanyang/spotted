@@ -101,6 +101,7 @@ class ReportController extends Controller {
             }
 
         } catch (\Exception $e) {
+        	print $e;
             $app->render(500, ['Status' => 'An error occurred.' ]);
         }
     }
