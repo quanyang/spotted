@@ -27,21 +27,20 @@ class Report extends Model
     }
  
     public function getLocationAttribute($value){
- 
         $loc =  substr($value, 6);
         $loc = preg_replace('/[ ,]+/', ',', $loc, 1);
  
         return substr($loc,0,-1);
     }
  
-    public function newQuery($excludeDeleted = true)
-    {
+    public function newQuery($excludeDeleted = true) {
         $raw='';
         foreach($this->geofields as $column){
             $raw .= ' astext('.$column.') as '.$column.' ';
         }
- 
-        return parent::newQuery($excludeDeleted)->addSelect('*',\DB::raw($raw));
+
+        use Illuminate\Database\Query\Expression as raw;
+        return parent::newQuery($excludeDeleted)->addSelect('*',new raw($raw));
     }
 
     public function scopeDistance($query,$dist,$location)
