@@ -109,8 +109,8 @@ myApp.onPageInit('lost', function(page) {
             });
         });
     });
-    console.log(this.photoURL);
-    $('#image-holder').attr('src',this.photoURL);
+    console.log(photoURL);
+    $('#image-holder').attr('src',photoURL);
     
 });
 
