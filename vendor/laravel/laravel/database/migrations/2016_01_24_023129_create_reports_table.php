@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReportsTable extends Migration
+class CreateReportTable extends Migration
 {
     /**
      * Run the migrations.
@@ -24,11 +24,9 @@ class CreateReportsTable extends Migration
             $table->string('email');
             $table->string('pet_name');
             $table->integer('status')->unsigned();
+            $table->float('longitude',10,6);
+            $table->float('latitude',10,6);
             $table->timestamps();
-        });
-
-        Schema::table('reports',function($table) {
-            DB::statement('ALTER TABLE reports ADD location POINT' );
         });
     }
 
