@@ -23,6 +23,7 @@ $(document).ready(function() {
         var formData = new FormData($('#lost-form')[0]);
         var url = "api/photo";
         // the script where you handle the form input.
+        $('.loader-overlay').show();
         $.ajax({
             type: "POST",
             url: url,
@@ -38,6 +39,7 @@ $(document).ready(function() {
                 $('#lost-form')[0].reset();
                 photoURL = data['photoURL'];
                 mainView.router.loadPage('lost.html');
+                $('.loader-overlay').hide();
             },
             error: function(data) {
                 console.log(data);
@@ -60,6 +62,7 @@ $(document).ready(function() {
         var formData = new FormData($('#stray-form')[0]);
         var url = "api/photo";
         // the script where you handle the form input.
+        $('.loader-overlay').show();
         $.ajax({
             type: "POST",
             url: url,
@@ -72,6 +75,7 @@ $(document).ready(function() {
             },
             success: function(data) {
                 // Should redirect to job page
+                $('.loader-overlay').hide();
                 $('#stray-form')[0].reset();
                 photoURL = data['photoURL'];
                 mainView.router.loadPage('spotted.html');

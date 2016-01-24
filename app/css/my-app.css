@@ -5,6 +5,23 @@ div[class*="col-"] {
   border: 1px solid #ddd;
   padding: 5px;
 }
+
+.loader-overlay {
+  position:absolute;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  z-index: 10000000000;
+  background-color: rgba(0,0,0,0.4);
+}
+.loader-overlay >div {
+  margin-top:47%;
+  margin-left:47%;
+  z-index: 101;
+  background:transparent;
+}
+
 .row {
   margin-bottom: 15px;
 }          
