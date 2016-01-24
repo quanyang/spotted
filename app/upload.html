@@ -1,10 +1,10 @@
 
 <!-- We don't need full layout here, because this page will be parsed with Ajax-->
 <!-- Top Navbar-->
-<div class="navbar">
+<div class="navbar" style="background:#35BEC1;">
   <div class="navbar-inner">
-    <div class="left"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
-    <div class="center sliding"><img src="img/SP0TTED%20L0G0.png" style="height:30px;"></div>
+    <div class="left"><a href="#" class="back link whiteiconcolor"> <i class="icon icon-back whiteiconcolor"></i><span style="color: #fff;">Back</span></a></div>
+    <div class="center sliding"><font color="#fff">Spotted</font></div>
     <div class="right">
       <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
     </div>
@@ -21,7 +21,7 @@
                  <div class="row  no-gutter" style="margin-bottom: 0px">
                   <div class="col-33" style="border: none;" ><img src="http://goo.gl/pB9rpQ"/ style="width:80px;"></div>
                   <div class="col-66" style="border: none;">
-<textarea style="width: 100%; border: none; border-color: transparent; " rows= "4" placeholder="Characteristics of stray animals Ie temperament, physical features .etc">
+<textarea name="characteristics" style="width: 100%; border: none; border-color: transparent; " rows= "4" placeholder="Characteristics of stray animals Ie temperament, physical features .etc">
 </textarea></div>
                 </div>
             </div>
@@ -71,13 +71,13 @@
                     <div class="item-content">
                         <div class="item-inner">
                           <div class="item-input">
-                            <select id="mySelect" onchange="showhide()">
+                            <select id="category" onchange="showhide()">
                                 <option value="Dog" selected>Dog</option>
                                 <option value="Cat">Cat</option>
                                 <option value="Bird">Bird</option>
                                 <option value="Other">Others</option>
                             </select>
-                              <input type="text" name="name" placeholder="Others" id="newpost" style="display:none;">
+                              <input type="text" name="others" placeholder="Others" id="others" style="display:none;">
                           </div>
                         </div>
                       </div>    
@@ -93,7 +93,7 @@
                     <div class="item-content">
                         <div class="item-inner">
                           <div class="item-input">
-                            <select>
+                            <select id="frequency">
                                 <option value="low" selected>Once or twice</option>
                                 <option value="medium">Often</option>
                                 <option value="high">Always</option>
@@ -113,7 +113,7 @@
                 <div class="item-media"><i class="icon icon-form-name"></i></div>  
                 <div class="item-inner">
                   <div class="item-input">
-                    <input type="text" name="name" placeholder="Name">
+                    <input type="text" name="fullName" placeholder="Name">
                   </div>
                 </div>
               </div>
@@ -123,7 +123,7 @@
                 <div class="item-media"><i class="icon icon-form-tel"></i></div>  
                 <div class="item-inner">
                   <div class="item-input">
-                    <input type="text" name="name" placeholder="Phone Number">
+                    <input type="text" name="number" placeholder="Phone Number">
                   </div>
                 </div>
               </div>
@@ -133,7 +133,7 @@
                 <div class="item-media"><i class="icon icon-form-email"></i></div>
                 <div class="item-inner">
                   <div class="item-input">
-                    <input type="text" name="name" placeholder="Email">
+                    <input type="text" name="email" placeholder="Email">
                   </div>
                 </div>
               </div>

@@ -23,3 +23,7 @@ div[class*="col-"] {
 #map {
         height: 230px;
 }
+
+.blackiconcolor path {
+     fill: #ff0000;
+}

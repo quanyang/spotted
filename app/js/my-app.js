@@ -83,9 +83,9 @@ function showPosition(position) {
 }
 
 function showhide() {
-    var x = document.getElementById("mySelect").value;
-    var div1 = document.getElementById("newpost");
-    var div2 = document.getElementById("mySelect");
+    var x = document.getElementById("category").value;
+    var div1 = document.getElementById("others");
+    var div2 = document.getElementById("category");
 
     if ((div1.style.display !== "none") && (x == 'Other')) {
         div1.style.display = "none";
