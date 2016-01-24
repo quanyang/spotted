@@ -178,6 +178,7 @@ function strayPageSubmit() {
                 // Should redirect to job page
                  myApp.alert('Your report has been sent!',"", function () {
                         mainView.router.back({ url: 'index.html' });
+                        mainView.router.back({ url: 'index.html' });
                     });
             },
             error: function(data) {
