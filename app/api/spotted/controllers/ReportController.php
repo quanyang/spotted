@@ -43,7 +43,7 @@ class ReportController extends Controller {
             $number = @$allPostVars['number']?@trim(htmlspecialchars($allPostVars['number'], ENT_QUOTES, 'UTF-8')):NULL;
             $frequency = @$allPostVars['frequency']?@trim(htmlspecialchars($allPostVars['number'], ENT_QUOTES, 'UTF-8')):0; // 0,1,2
             $category = @$allPostVars['category']?@trim(htmlspecialchars($allPostVars['category'], ENT_QUOTES, 'UTF-8')):0; //0,1,2,3 dog cat bird others
-            $others = @$allPostVars['others'] && $allPostVars['category'] == 3?@trim(htmlspecialchars($allPostVars['others'], ENT_QUOTES, 'UTF-8')):NULL;
+            $others = @$allPostVars['others'] && $allPostVars['category'] == 3?@trim(htmlspecialchars($allPostVars['others'], ENT_QUOTES, 'UTF-8')):"";
             $fullName = @$allPostVars['fullName']?@trim(htmlspecialchars($allPostVars['fullName'], ENT_QUOTES, 'UTF-8')):NULL;
             $email = @$allPostVars['email']?@trim(htmlspecialchars($allPostVars['email'], ENT_QUOTES, 'UTF-8')):NULL;
             $longitude = @$allPostVars['longitude']?@trim(htmlspecialchars($allPostVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
@@ -118,7 +118,7 @@ class ReportController extends Controller {
             $number = @$allPostVars['number']?@trim(htmlspecialchars($allPostVars['number'], ENT_QUOTES, 'UTF-8')):NULL;
             $frequency = @$allPostVars['frequency']?@trim(htmlspecialchars($allPostVars['number'], ENT_QUOTES, 'UTF-8')):0; // 0,1,2
             $category = @$allPostVars['category']?@trim(htmlspecialchars($allPostVars['category'], ENT_QUOTES, 'UTF-8')):0; //0,1,2,3 dog cat bird others
-            $others = @$allPostVars['others'] && $allPostVars['category'] == 3?@trim(htmlspecialchars($allPostVars['others'], ENT_QUOTES, 'UTF-8')):NULL;
+            $others = @$allPostVars['others'] && $allPostVars['category'] == 3?@trim(htmlspecialchars($allPostVars['others'], ENT_QUOTES, 'UTF-8')):"";
             $fullName = @$allPostVars['fullName']?@trim(htmlspecialchars($allPostVars['fullName'], ENT_QUOTES, 'UTF-8')):NULL;
             $email = @$allPostVars['email']?@trim(htmlspecialchars($allPostVars['email'], ENT_QUOTES, 'UTF-8')):NULL;
             $longitude = @$allPostVars['longitude']?@trim(htmlspecialchars($allPostVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;

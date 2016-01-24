@@ -104,6 +104,12 @@ myApp.onPageInit('about', function(page) {
 function lostPageSubmit() {
 
     var formData = new FormData($('#lost-details-form')[0]);
+    formData.append("longitude", longitude);
+    formData.append("latitude", latitude);
+    formData.append("image", this.photoURL);
+
+
+
     var url = "api/report/lost";
         // the script where you handle the form input.
         $.ajax({
