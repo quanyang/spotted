@@ -60,6 +60,7 @@ class App {
             });
 
             $app->group('/report', function() use ($app) {
+                $app->get('/all', 'spotted\controllers\ReportController::getAllLostReports');
                 $app->get('/lost', 'spotted\controllers\ReportController::getNearByLostReport');
                 $app->post('/lost', 'spotted\controllers\ReportController::newLostReport');
                 $app->post('/stray', 'spotted\controllers\ReportController::newStrayReport');

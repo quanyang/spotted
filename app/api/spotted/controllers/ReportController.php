@@ -13,6 +13,17 @@ use spotted\library\InputValidator;
 class ReportController extends Controller {
 
 
+	public static function getAllLostReports() {
+		$app = \Slim\Slim::getInstance();
+        try {
+            $reports = \spotted\models\Report::all();
+            echo json_encode($reports, JSON_UNESCAPED_SLASHES);
+        } catch (\Exception $e) {
+        	print $e;
+            $app->render(500, ['Status' => 'An error occurred.' ]);
+        }
+	}
+
 	public static function getNearByLostReport() {
 		$app = \Slim\Slim::getInstance();
         try {
@@ -27,7 +38,6 @@ class ReportController extends Controller {
             $point = $latitude.",".$longitude;
 
             $distance = 2;
-            $reports = \spotted\models\Report::distance($distance,$point)->get();
             echo json_encode($reports, JSON_UNESCAPED_SLASHES);
         } catch (\Exception $e) {
         	print $e;
