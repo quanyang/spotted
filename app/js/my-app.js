@@ -92,15 +92,12 @@ $(document).ready(function() {
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function(page) {
     // run createContentPage func after link was clicked
-    console.log("")
     $$('.create-page').on('click', function() {
         createContentPage();
     });
 });
 
 myApp.onPageInit('lost', function(page) {
-    console.log(this.photoURL);
-    $('#image-holder').attr('src',this.photoURL);
     initMap();
     getLocation();
     $$('.confirm-ok').on('click', function() {
@@ -112,6 +109,9 @@ myApp.onPageInit('lost', function(page) {
             });
         });
     });
+    console.log(this.photoURL);
+    $('#image-holder').attr('src',this.photoURL);
+    
 });
 
 myApp.onPageInit('spotted', function(page) {
@@ -163,7 +163,6 @@ function createContentPage() {
 }
 
 function getLocation() {
-    console.log("in here");
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
