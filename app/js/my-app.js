@@ -98,6 +98,7 @@ myApp.onPageInit('about', function(page) {
 });
 
 myApp.onPageInit('lost', function(page) {
+    $('#image-holder').attr('src',photoURL);
     initMap();
     getLocation();
     $$('.confirm-ok').on('click', function() {
@@ -109,13 +110,10 @@ myApp.onPageInit('lost', function(page) {
             });
         });
     });
-    console.log(photoURL);
-    $('#image-holder').attr('src',photoURL);
-    
 });
 
 myApp.onPageInit('spotted', function(page) {
-    $('#image-holder').attr('src',this.photoURL);
+    $('#image-holder').attr('src',photoURL);
     initMap();
     getLocation();
 });
