@@ -183,11 +183,11 @@ class ImageController extends Controller {
     private static function compress($source,$dest) {
         $info = getimagesize($source); 
         if ($info['mime'] == 'image/jpeg') {
-            $image = imagecreatefromjpeg($source);
+            $image = \imagecreatefromjpeg($source);
         } elseif ($info['mime'] == 'image/gif') {
-            $image = imagecreatefromgif($source); 
+            $image = \imagecreatefromgif($source); 
         } elseif ($info['mime'] == 'image/png') {
-            $image = imagecreatefrompng($source); 
+            $image = \imagecreatefrompng($source); 
         } 
 
         imagejpeg($image, $dest, ImageController::COMPRESSION_RATE); 
