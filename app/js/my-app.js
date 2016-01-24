@@ -101,18 +101,47 @@ myApp.onPageInit('about', function(page) {
     });
 });
 
+function lostPageSubmit() {
+
+    var formData = new FormData($('#lost-form')[0]);
+    var url = "api/report/lost";
+        // the script where you handle the form input.
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData, // serializes the form's elements.
+            xhr: function() { // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
+                }
+                return myXhr;
+            },
+            success: function(data) {
+                // Should redirect to job page
+                console.log(data);
+                myApp.alert('Your request has been sent!', "", function() {
+                    mainView.router.load({
+                        url: 'index.html'
+                    });
+                });
+            },
+            error: function(data) {
+                console.log(data);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        }, 'json');
+
+
+}
+
 myApp.onPageInit('lost', function(page) {
     $('#image-holder').attr('src',photoURL);
     initMap();
     getLocation();
     $$('.confirm-ok').on('click', function() {
-        myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?', function() {
-            myApp.alert('Your report has been sent!', "", function() {
-                mainView.router.load({
-                    url: 'index.html'
-                });
-            });
-        });
+        lostPageSubmit();
     });
 });
 
