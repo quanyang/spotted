@@ -124,7 +124,7 @@ function lostPageSubmit() {
             success: function(data) {
                 // Should redirect to job page
                 myApp.alert('Your request has been sent!', "", function() {
-                    mainView.router.load({
+                    mainView.router.back({
                         url: 'index.html'
                     });
                 });
