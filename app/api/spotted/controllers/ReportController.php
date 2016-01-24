@@ -12,11 +12,22 @@ use spotted\library\InputValidator;
  **/
 class ReportController extends Controller {
 
+	public static function getAllStrayReports() {
+		$app = \Slim\Slim::getInstance();
+        try {
+            $reports = \spotted\models\Report::where('is_lost','=','0')->get();
+            echo json_encode($reports, JSON_UNESCAPED_SLASHES);
+        } catch (\Exception $e) {
+        	print $e;
+            $app->render(500, ['Status' => 'An error occurred.' ]);
+        }
+	}
+
 
 	public static function getAllLostReports() {
 		$app = \Slim\Slim::getInstance();
         try {
-            $reports = \spotted\models\Report::all();
+            $reports = \spotted\models\Report::where('is_lost','=','1')->get();
             echo json_encode($reports, JSON_UNESCAPED_SLASHES);
         } catch (\Exception $e) {
         	print $e;
