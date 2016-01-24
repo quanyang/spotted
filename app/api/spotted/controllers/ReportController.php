@@ -129,7 +129,7 @@ class ReportController extends Controller {
             $isLostReport = 1; //Lost Report
 
 
-            if (!preg_match("/^-?\d{1,3}\.{1}\d*$/",$longitude) ||!preg_match("/^-?\d*\.{1}\d*$/", $latitude)||!InputValidator::isValidStringInput($pet_name,255,0) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)||$category == 3 && !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)||!InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
+            if (!preg_match("/^-?\d{1,3}\.{1}\d*$/",$longitude) ||!preg_match("/^-?\d*\.{1}\d*$/", $latitude)||!InputValidator::isValidStringInput($pet_name,255,0) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| ($category == 3 && !InputValidator::isValidStringInput($others,255,0) ) || !InputValidator::isValidIntValBetween($category,0,3)||!InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
