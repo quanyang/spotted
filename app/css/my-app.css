@@ -27,3 +27,8 @@ div[class*="col-"] {
 .blackiconcolor path {
      fill: #ff0000;
 }
+
+
+.button {
+     background-color: #35BEC1;
+}
