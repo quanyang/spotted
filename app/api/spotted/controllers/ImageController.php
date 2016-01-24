@@ -38,7 +38,7 @@ class ImageController extends Controller {
                     $app->render(500, array("Status" => "Unable to save file"));
                 } else {
                     print $result;
-                    $app->render(200, array("Status" => "OK", "photoURL" => $result->photoUrl));
+                    $app->render(200, array("Status" => "OK", "photoURL" => $result));
                 }
             }
 
@@ -146,7 +146,7 @@ class ImageController extends Controller {
 
             $uniqueId = md5(uniqid("", true));
             $image = new \spotted\models\Image();
-            $image->uniqueId = $uniqueId;
+            $image->publicId = $uniqueId;
             $image->fileName = $fileName;
             $image->save();
 
@@ -174,7 +174,8 @@ class ImageController extends Controller {
 
         $compressPath = $this->compress($data,$dir . $name);
         if (file_exists($compressPath)) {
-            return $this->saveToDatabase($name, $route);
+            $a = $this->saveToDatabase($name, $route);
+            return $a;
         } else {
             return null;
         }
