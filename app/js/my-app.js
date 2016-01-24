@@ -123,11 +123,10 @@ function lostPageSubmit() {
             },
             success: function(data) {
                 // Should redirect to job page
-                console.log(data);
                 myApp.alert('Your request has been sent!', "", function() {
-                  /*  mainView.router.load({
+                    mainView.router.load({
                         url: 'index.html'
-                    });*/
+                    });
                 });
             },
             error: function(data) {
@@ -150,6 +149,49 @@ myApp.onPageInit('lost', function(page) {
     });
 });
 
+function strayPageSubmit() {
+
+    var formData = new FormData($('#stray-details-form-1')[0]);
+    var formData2 = new FormData($('#stray-details-form-2')[0]);
+    formData.append("longitude", longitude);
+    formData.append("latitude", latitude);
+    var buffer = this.photoURL.split('/');
+    formData.append("image", buffer[buffer.length-1]);
+
+    console.log(formData);
+    console.log(formData2);
+
+    var url = "api/report/stray";
+        // the script where you handle the form input.
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData, // serializes the form's elements.
+            xhr: function() { // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
+                }
+                return myXhr;
+            },
+            success: function(data) {
+                // Should redirect to job page
+                 $$('.confirm-ok').on('click', function () {
+                    myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
+                        myApp.alert('Your report has been sent!',"", function () {
+                            mainView.router.load({ url: 'index.html' });
+                        });
+                    });
+                });
+            },
+            error: function(data) {
+                console.log(data);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        }, 'json');
+}
+
 myApp.onPageInit('spotted', function(page) {
     $('#image-holder').attr('src',photoURL);
     initMap();
@@ -158,13 +200,10 @@ myApp.onPageInit('spotted', function(page) {
 
 
 myApp.onPageInit('spotted-2', function (page) {
-        
-    $$('.confirm-ok').on('click', function () {
-        myApp.confirm('All information will be sent to relevant rescue groups. Kindly refrain from irrelevant spam.', 'Are you sure?',function () {
-            myApp.alert('Your report has been sent!',"", function () {
-                mainView.router.load({ url: 'index.html' });
-            });
-        });
+    $$('#stray-details-form-2').submit( function(ev) {
+        ev.preventDefault();
+        strayPageSubmit();
+        return false;
     });
 });
 

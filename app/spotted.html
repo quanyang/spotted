@@ -15,13 +15,14 @@
   <div data-page="spotted" class="page">
     <!-- Scrollable page content-->
     <div class="page-content">
+      <form id="stray-details-form-1" class="list-block" onsubmit="return false;">
     <div class="content-block-title">Stray Information</div>       
       <div class="content-block">
             <div class="content-block-inner">
                  <div class="row  no-gutter" style="margin-bottom: 0px">
                   <div class="col-33" style="border: none;" ><img id="image-holder" src="http://goo.gl/pB9rpQ"/ style="width:80px;"></div>
                   <div class="col-66" style="border: none;">
-<textarea name="characteristics" style="width: 100%; border: none; border-color: transparent; " rows= "4" placeholder="Characteristics of stray animals Ie temperament, physical features .etc"></textarea></div>
+<textarea name="characteristics" style="width: 100%; border: none; border-color: transparent; " rows= "4" placeholder="Characteristics of stray animals Ie temperament, physical features .etc" required maxlength="5000"></textarea></div>
                 </div>
             </div>
       </div>
@@ -58,11 +59,11 @@
                         <div class="item-media"><i class="fa fa-tag"></i></div>
                         <div class="item-inner">
                           <div class="item-input">
-                            <select id="category" onchange="showhide()">
-                                <option value="Dog" selected>Dog</option>
-                                <option value="Cat">Cat</option>
-                                <option value="Bird">Bird</option>
-                                <option value="Other">Others</option>
+                            <select id="category" name="category" onchange="showhide()">
+                                <option value="0" selected>Dog</option>
+                                <option value="1">Cat</option>
+                                <option value="2">Bird</option>
+                                <option value="3">Others</option>
                             </select>
                               <input type="text" name="others" placeholder="Others" id="others" style="display:none;">
                           </div>
@@ -81,10 +82,10 @@
                         <div class="item-media"><i class="fa fa-eye"></i></div>
                         <div class="item-inner">
                           <div class="item-input">
-                            <select id="frequency">
-                                <option value="low" selected>Once or twice</option>
-                                <option value="medium">Often</option>
-                                <option value="high">Always</option>
+                            <select id="frequency" name="frequency">
+                                <option value="0" selected>Once or twice</option>
+                                <option value="1">Often</option>
+                                <option value="2">Always</option>
                             </select>
                           </div>
                         </div>
@@ -94,6 +95,7 @@
         </div>
 
          <a href="spotted-2.html"class="button button-big confirm-ok" style="color:#fff; border:none" >Next</a>
+       </form>
     </div>
      
   </div>

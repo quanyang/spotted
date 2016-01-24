@@ -17,14 +17,14 @@
     <div class="page-content">
     
       <div class="content-block-title">Spotter Information</div>    
-      <form id="my-form" class="list-block">
+      <form id="stray-details-form-2" class="list-block" onsubmit="return false;">
           <ul>
             <li>
               <div class="item-content">
              <div class="item-inner">      
                 <div class="item-media"><i class="fa fa-user" style = "margin-right:20px;"></i></div>
                   <div class="item-input">
-                    <input type="text" name="fullName" placeholder="Name">
+                    <input type="text" name="fullName" placeholder="Name" required maxlength="255">
                   </div>
                 </div>
               </div>
@@ -34,7 +34,7 @@
                 <div class="item-inner">
                 <div class="item-media"><i class="fa fa-phone " style = "margin-right:20px;"></i></div>  
                   <div class="item-input">
-                    <input type="text" name="number" placeholder="Phone Number">
+                    <input type="number" name="number" placeholder="Phone Number" required maxlength="10">
                   </div>
                 </div>
               </div>
@@ -45,16 +45,17 @@
                 <div class="item-media"><i class="fa fa-envelope" style = "margin-right:20px;"></i></div>
                 
                   <div class="item-input">
-                    <input type="text" name="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email" required maxlength="255">
                   </div>
                 </div>
               </div>
             </li>  
           </ul>
           <p class="list-block-label">Leave your personal information if you would like to be contacted by rescue groups for more information. This is optional you may choose to <a href=# onclick="onClickFunction();">skip this.</a></p>
+          <input type="submit" class="button button-big confirm-ok" style="color:#fff; border:none">
         </form>    
 
-         <a class="button button-big confirm-ok" style="color:#fff; border:none" >Next</a>
+         
     </div>
      
   </div>

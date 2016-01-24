@@ -52,10 +52,10 @@ class ReportController extends Controller {
             $status = 0; // default
             $isLostReport = 0; //Stray Report
 
-            if (!preg_match("/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/",$longitude) ||!preg_match("/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/", $latitude) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)|| !InputValidator::isValidStringInput($others,255,0)|| !InputValidator::isValidIntValBetween($category,0,3)|| !InputValidator::isValidIntValBetween($frequency,0,2) || !InputValidator::isValidStringInput($characteristics,5000,0)) {
+             if (!preg_match("/^-?\d{1,3}\.{1}\d*$/",$longitude) ||!preg_match("/^-?\d*\.{1}\d*$/", $latitude) ||!InputValidator::isValidStringInput($image_id,255,0) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)||($category == 3 && !InputValidator::isValidStringInput($others,255,0) )|| !InputValidator::isValidStringInput($characteristics,5000,0)) {
                 $app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
-            }
+            }	
 
             if (!is_null($email) && empty($email) && !InputValidator::isValidStringInput($email,255,0) && !InputValidator::isValidEmail($email)) {
             	$app->render(400, ['Status' => 'Invalid input.' ]);
@@ -91,13 +91,16 @@ class ReportController extends Controller {
             $report->full_name = $fullName;
             $report->email = $email;
             $report->number = $number;
-            $report->setLocationAttribute($point);
+            $report->longitude = $longitude;
+            $report->latitude = $latitude;
             $report->save();
 
             if ($report) {
-            	$image = \spotter\models\Image::where('uniqueId','=',$image_id)->first();
-            	$image->report_id = $report->id;
-            	$image->save();
+            	$image = \spotted\models\Image::where('publicId','=',$image_id)->first();
+				if ($image) {
+            		$image->report_id = $report->id;
+            		$image->save();
+            	}
             	echo json_encode($report, JSON_UNESCAPED_SLASHES);
             } else {
 				throw new \Exception('Error!');
