@@ -155,7 +155,8 @@ class ImageController extends Controller {
                 return $id;
             }
             return null;
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
+            echo $e;
             return null;
         }
     }
@@ -172,8 +173,6 @@ class ImageController extends Controller {
         }
 
         $compressPath = $this->compress($data,$dir . $name);
-
-        return $compressPath;
         if (file_exists($compressPath)) {
             return $this->saveToDatabase($name, $route);
         } else {
