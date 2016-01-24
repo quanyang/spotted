@@ -37,6 +37,7 @@ class ImageController extends Controller {
                 if(is_null($result)) {
                     $app->render(500, array("Status" => "Unable to save file"));
                 } else {
+                    print $result;
                     $app->render(200, array("Status" => "OK", "photoURL" => $result->photoUrl));
                 }
             }
