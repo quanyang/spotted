@@ -99,6 +99,7 @@ myApp.onPageInit('about', function(page) {
 });
 
 myApp.onPageInit('lost', function(page) {
+    console.log(this.photoURL);
     $('#image-holder').attr('src',this.photoURL);
     initMap();
     getLocation();
