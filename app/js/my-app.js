@@ -27,7 +27,7 @@ $(document).ready(function(){
         },
         success: function(data){
         // Should redirect to job page
-        console.log(data);
+        console.log(data['photoURL']);
         },
         error: function(data){
             console.log(data);
