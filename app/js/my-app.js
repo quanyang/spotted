@@ -32,7 +32,7 @@ $(document).ready(function() {
             success: function(data) {
                 // Should redirect to job page
                 $('#lost-form')[0].reset();
-                this.photoURL = data['photoURL'];
+                photoURL = data['photoURL'];
                 mainView.router.loadPage('lost.html');
             },
             error: function(data) {
@@ -69,7 +69,7 @@ $(document).ready(function() {
             success: function(data) {
                 // Should redirect to job page
                 $('#stray-form')[0].reset();
-                this.photoURL = data['photoURL'];
+                photoURL = data['photoURL'];
                 mainView.router.loadPage('spotted.html');
             },
             error: function(data) {
