@@ -20,7 +20,7 @@ class ReportController extends Controller {
             $longitude = @$getVars['longitude']?@trim(htmlspecialchars($getVars['longitude'], ENT_QUOTES, 'UTF-8')):NULL;
             $latitude = @$getVars['latitude']?@trim(htmlspecialchars($getVars['latitude'], ENT_QUOTES, 'UTF-8')):NULL;
             
-            if ( !is_int(intval($longitude)) ||!is_int(intval($latitude)) || !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)) {
+            if ( !preg_match('/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/', $longitude) ||!preg_match('/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/', $latitude)|| !InputValidator::isValidStringInput($latitude,255,0)|| !InputValidator::isValidStringInput($longitude,255,0)) {
             	$app->render(400, ['Status' => 'Invalid input.' ]);
                 return;
             }
